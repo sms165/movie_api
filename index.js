@@ -49,7 +49,7 @@ const morgan = require('morgan');
 
 
 const fs = require('fs');
-const path = requie('path');
+const path = require('path');
 
 //log.txt file is created in the root directory
 const accessLogStream = fs.createWriteStream(path.join(__dirname, 'log.txt'), {
