@@ -1,44 +1,44 @@
 //movie list
 let topMovies = [{
-    title: 'Pillow Talk',
-    year: 1959
-},
-{
-    title: 'The Glass Bottom Boat',
-    year: 1966
-},
-{
-    title: 'Lover Come Back',
-    year: 1961
-},
-{
-    title: 'Send Me No Flowers',
-    year: 1964
-},
-{
-    title: 'The Thrill of It All',
-    year: 1963
-},
-{
-    title: 'The Pajama Game',
-    year: 1957
-},
-{
-    title: 'Please Don\'t Eat the Daisies',
-    year: 1959
-},
-{
-    title: 'How to Lose a Guy in 10 Days',
-    year: 2003
-},
-{
-    title: 'Grease',
-    year: 1978
-},
-{
-    title: 'Sweet Home Alabama',
-    year: 2002
-},
+        title: 'Pillow Talk',
+        year: 1959
+    },
+    {
+        title: 'The Glass Bottom Boat',
+        year: 1966
+    },
+    {
+        title: 'Lover Come Back',
+        year: 1961
+    },
+    {
+        title: 'Send Me No Flowers',
+        year: 1964
+    },
+    {
+        title: 'The Thrill of It All',
+        year: 1963
+    },
+    {
+        title: 'The Pajama Game',
+        year: 1957
+    },
+    {
+        title: 'Please Don\'t Eat the Daisies',
+        year: 1959
+    },
+    {
+        title: 'How to Lose a Guy in 10 Days',
+        year: 2003
+    },
+    {
+        title: 'Grease',
+        year: 1978
+    },
+    {
+        title: 'Sweet Home Alabama',
+        year: 2002
+    },
 
 ];
 
@@ -48,14 +48,18 @@ const app = express();
 const morgan = require('morgan');
 
 
-const fs = require('fs'),
-    path = requie('path');
+const fs = require('fs');
+const path = requie('path');
 
 //log.txt file is created in the root directory
-const accessLogStream = fs.createWriteStream(path.join(_dirname, 'log.txt'), {flags: 'a'});
+const accessLogStream = fs.createWriteStream(path.join(__dirname, 'log.txt'), {
+    flags: 'a'
+});
 
 //logger
-app.use(morgan('combined', {stream:accessLogStream}));
+app.use(morgan('combined', {
+    stream: accessLogStream
+}));
 
 
 //GET requests
@@ -73,6 +77,14 @@ app.get('/documentation', (req, res) => {
 //url /movies returns movies in json format
 app.get('/movies', (req, res) => {
     res.json(topMovies);
+});
+
+
+
+//error handling
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send('Something went wrong!');
 });
 
 //listen for requests
