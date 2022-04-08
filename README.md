@@ -52,5 +52,6 @@ reading data from requests and morgan for logging.
 # packages dependencies
 * Express 
 * body-parser
+* morgan : logging middleware (information about request)
 
 
