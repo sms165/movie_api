@@ -68,11 +68,12 @@ app.get('/', (req, res) => {
 });
 
 // url /documentation uses express.static to get file from public folder
-app.get('/documentation', (req, res) => {
-    res.sendFile('public/documentation.html', {
-        root: __dirname
-    });
-});
+app.use(express.static('public'))
+// app.get('/documentation', (req, res) => {
+//     res.sendFile('public/documentation.html', {
+//         root: __dirname
+//     });
+// });
 
 //url /movies returns movies in json format
 app.get('/movies', (req, res) => {
