@@ -113,7 +113,7 @@ let users = [{
 },
 {
     id: '2',
-    username: 'Sam',
+    username: 'Sammy',
     name: 'Sammy',
     password: 'password',
     favorites: [ 'Scream'   
@@ -252,8 +252,9 @@ app.put('/users/:username', (req, res) => {
 
 //CREATE
 // add a movie to users list of favorites
-app.post('users/:username/:movieTitle', (req, res) =>{
-    const { username, movieTitle} = req.params;
+app.post('/users/:username/:movieTitle', (req, res) =>{
+    const { username} = req.params;
+    const { movieTitle} = req.params;
 
     let user = users.find(user => user.username == username);
 
@@ -270,7 +271,7 @@ app.post('users/:username/:movieTitle', (req, res) =>{
 
 // DELETE
 //allow user to remove a movie from their favorites list
-app.delete('users/:username/:movieTitle', (req, res) =>{
+app.delete('/users/:username/:movieTitle', (req, res) =>{
     const { username, movieTitle} = req.params;
 
     let user = users.find(user => user.username == username);
