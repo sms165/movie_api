@@ -104,21 +104,22 @@ let movies = [{
 
 // user list
 let users = [{
-    id: '1',
-    username: 'testUser',
-    name: 'Test User',
-    password: 'password',
-    favorites: [ 'Scream'   
-    ]
-},
-{
-    id: '2',
-    username: 'Sammy',
-    name: 'Sammy',
-    password: 'password',
-    favorites: [ 'Scream'   
-    ]
-} ];
+        id: '1',
+        username: 'testUser',
+        name: 'Test User',
+        password: 'password',
+        favorites: ['Scream']
+    },
+    {
+        id: '2',
+        username: 'Sammy',
+        name: 'Sammy',
+        password: 'password',
+        favorites: ['Scream']
+    }
+];
+
+
 
 const express = require('express');
 const app = express();
@@ -149,6 +150,7 @@ app.use(bodyParser.json());
 //GET requests
 app.get('/', (req, res) => {
     res.send('Welcome to myFlix!');
+
 });
 
 // url /documentation uses express.static to get file from public folder
@@ -168,51 +170,64 @@ app.get('/movies', (req, res) => {
 // READ
 // return data about a single movie by title
 app.get('/movies/:title', (req, res) => {
-    const { title} = req.params;
-    const movie = movies.find(movie =>movie.title === title);
+    const {
+        title
+    } = req.params;
+    const movie = movies.find(movie => movie.title === title);
 
-    if(movie){
+    if (movie) {
         res.status(200).json(movie);
-    }else{
+    } else {
         res.status(400).send("Movie is not found")
     }
-       
+
 });
 
 // READ
 //return data about a genre by title
 app.get('/movies/genre/:genres', (req, res) => {
-    const { genres} = req.params;
-    const genre = movies.find(movie =>movie.genre === genres).genre;
+    const {
+        genres
+    } = req.params;
+
+    //const movieGenre = movies.genre.include(genres)
+    movieGenre = movies.filter(movie => movie.genre.includes(genres));
+
+    if (movieGenre.length >0) {
+        res.json(movieGenre);
+    } else {
+        res.status(400).send("Genre is not found")
 
 
-    // if (genre) {
-    //     console.log(Object.values(movie.genre));
-    //     // let genre = Object.values(movie.genre);
-        
-    //     // for (let i = 0; i < genre.length; i++) {
-    //     //     const element = genre[i];
-    //     //     console.log(element);
-    //     //     res.status(201).send('' + element);
+    }
 
-    //     // }
+    //res.send(console.log(movies.genres.includes(genres)))
+    //const genre = movies.find(movie =>movie.genre === genres).genre;
+
+    // if (movies.genre.includes(genres)) {
+    //     res.status(200).json(movies.title);
+
     // } else {
-    //     res.status(404).send('Movie with the name ' + req.params.title + ' was not found.')
+    //     res.status(400).send("Genre is not found")
+
+
     // }
 })
 
 // READ
 //return data about director by name
 app.get('/movies/director/:directorName', (req, res) => {
-    const { directorName } = req.params;
-    const director = movies.find(movie => movie.director.name === directorName ).director;
+    const {
+        directorName
+    } = req.params;
+    const director = movies.find(movie => movie.director.name === directorName).director;
 
     console.log(director)
-    
+
     if (director) {
         res.status(200).json(director);
-        
-    }else{
+
+    } else {
         res.status(400).send('No director found with the name ' + directorName);
     }
 });
@@ -235,7 +250,9 @@ app.post('/users', (req, res) => {
 // UPDATE
 // update user info: username
 app.put('/users/:username', (req, res) => {
-    const {username} =req.params;
+    const {
+        username
+    } = req.params;
     const updateUser = req.body;
 
     let user = users.find(user => user.username == username);
@@ -243,61 +260,70 @@ app.put('/users/:username', (req, res) => {
     if (user) {
         user.name = updateUser.name;
         res.status(200).json(user)
-        
-    }else{
+
+    } else {
         res.status(400).send('User cannot be found.')
     }
-    
+
 })
 
 //CREATE
 // add a movie to users list of favorites
-app.post('/users/:username/:movieTitle', (req, res) =>{
-    const { username} = req.params;
-    const { movieTitle} = req.params;
+app.post('/users/:username/:movieTitle', (req, res) => {
+    const {
+        username
+    } = req.params;
+    const {
+        movieTitle
+    } = req.params;
 
     let user = users.find(user => user.username == username);
 
     if (user) {
-        user.favorites.push(movieTitle); 
+        user.favorites.push(movieTitle);
         res.status(200).send(`${movieTitle} has been added to user ${username}`)
-        
-    }else{
+
+    } else {
         res.status(400).send('User cannot be found.')
     }
-    
-    
+
+
 });
 
 // DELETE
 //allow user to remove a movie from their favorites list
-app.delete('/users/:username/:movieTitle', (req, res) =>{
-    const { username, movieTitle} = req.params;
+app.delete('/users/:username/:movieTitle', (req, res) => {
+    const {
+        username,
+        movieTitle
+    } = req.params;
 
     let user = users.find(user => user.username == username);
 
     if (user) {
         user.favorites = user.favorites.filter(title => title !== movieTitle);
         res.status(200).send(`${movieTitle} has been removed from user ${username}`)
-        
-    }else{
+
+    } else {
         res.status(400).send('User cannot be found.')
     }
-    
+
 
 });
 //DELETE
 //allow user to deregister
-app.delete('/users/:username', (req, res) =>{
-    const { username } = req.params;
+app.delete('/users/:username', (req, res) => {
+    const {
+        username
+    } = req.params;
 
     let user = users.find(user => user.username == username);
 
     if (user) {
         users = users.filter(user => user.username !== username);
         res.status(200).send(`${username} has been deleted`)
-        
-    }else{
+
+    } else {
         res.status(400).send('User cannot be found.')
     }
 
@@ -314,4 +340,3 @@ app.use((err, req, res, next) => {
 app.listen(8080, () => {
     console.log('The app is listening on port 8080. ')
 });
-
