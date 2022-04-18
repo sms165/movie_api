@@ -154,7 +154,8 @@ app.get('/', (req, res) => {
 });
 
 // url /documentation uses express.static to get file from public folder
-app.use(express.static('public'))
+// route example /documentation.html
+app.use(express.static('public'));
 // app.get('/documentation', (req, res) => {
 //     res.sendFile('public/documentation.html', {
 //         root: __dirname
@@ -193,25 +194,13 @@ app.get('/movies/genre/:genres', (req, res) => {
     //const movieGenre = movies.genre.include(genres)
     movieGenre = movies.filter(movie => movie.genre.includes(genres));
 
-    if (movieGenre.length >0) {
+    if (movieGenre.length > 0) {
         res.json(movieGenre);
     } else {
         res.status(400).send("Genre is not found")
 
 
     }
-
-    //res.send(console.log(movies.genres.includes(genres)))
-    //const genre = movies.find(movie =>movie.genre === genres).genre;
-
-    // if (movies.genre.includes(genres)) {
-    //     res.status(200).json(movies.title);
-
-    // } else {
-    //     res.status(400).send("Genre is not found")
-
-
-    // }
 })
 
 // READ

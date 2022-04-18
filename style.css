@@ -1,0 +1,32 @@
+table{
+    padding: 5px;
+}
+th{
+    text-align: left;
+}
+
+td{
+    padding-right: 10px
+}
+tr{
+    outline: thin solid black;
+}
+
+.code{
+    font-size: smaller;
+    
+}
+
+
+
+.one{
+    text-indent: 2em;
+    
+    
+}
+
+.two{
+    text-indent: 4em;
+    
+    
+}

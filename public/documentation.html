@@ -1,17 +1,211 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../style.css">
     <title>Documentation</title>
+
 </head>
+
 <body>
     <h1>My flix</h1>
     <h2>Goal:</h2>
-    <p>To build the server-side component of a “movies” web application. The web application will provide users with access to information about different movies, directors, and genres. Users will be able to sign up, update their personal information, and create a list of their favorite movies.</p>
+    <p>To build the server-side component of a “movies” web application. The web application will provide users with
+        access to information about different movies, directors, and genres. Users will be able to sign up, update their
+        personal information, and create a list of their favorite movies.</p>
     <h3>Routes</h3>
-    
-</body>
-</html>
+    <h4>URL Endpoints and request methods</h4>
 
+    <!-- Business Logic, URL, HTTP method, Request body data format, Response body data format -->
+
+    <table>
+        <thead>
+            <th>Business Logic</th>
+            <th>URL</th>
+            <th>HTTP method</th>
+            <th>Request body data format</th>
+            <th>Response body data format</th>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Return a list of ALL movies to the user</td>
+                <td>/movies</td>
+                <td>GET</td>
+                <td>none</td>
+                <td>JSON object holding data about all the movies</td>
+            </tr>
+            <tr>
+                <td>Return data (description, genre, director, image URL, whether it’s featured or not) about a single
+                    movie by title to the user</td>
+                <td>/movies/:title</td>
+                <td>GET</td>
+                <td>none</td>
+                <td>JSON object holding data about a specific movie <br />
+                    Example: <br />
+                    <br />
+                    <div class="code">{ <br />
+                        <div class="one"> "title": "Grease",<br /></div>
+                        <div class="one">"year": 1978,<br /></div>
+                        <div class="one">"genre": [<br /></div>
+                        <div class="two">"comedy",<br /></div>
+                        <div class="two">"romance",<br /></div>
+                        <div class="two">"musical"<br /></div>
+                        <div class="one"> ],<br /></div>
+                        <div class="one">"director": {<br /></div>
+                        <div class="two">"name": "Randal Kleiser",<br /></div>
+                        <div class="two">"birth": 1946<br /></div>
+                        }<br />
+                        }
+                    </div>
+                    <br />
+                </td>
+            </tr>
+            <tr>
+                <td>Return data about a genre (description) by name/title (e.g., “musical”)</td>
+                <td>/movies/genre/:genres</td>
+                <td>GET</td>
+                <td>none</td>
+                <td>JSON object holding the data about all the movies with the searched for genre
+                    Example: <br />
+                    <br />
+                    <div class="code">{ <br />
+                        <div class="one"> "title": "The Pajama Game",<br /></div>
+                        <div class="one">"year": 1957,<br /></div>
+                        <div class="one">"genre": [<br /></div>
+                        <div class="two">"comedy",<br /></div>
+                        <div class="two">"drama",<br /></div>
+                        <div class="two">"musical"<br /></div>
+                        <div class="one"> ],<br /></div>
+                        <div class="one">"director": {<br /></div>
+                        <div class="two">"name": "George Abott",<br /></div>
+                        <div class="two">"birth": 1887<br /></div>
+                        <div class="two">"death": 1995<br /></div>
+                        }<br />
+                        }
+                    </div>
+                    <br />
+                    <div class="code">{ <br />
+                        <div class="one"> "title": "Grease",<br /></div>
+                        <div class="one">"year": 1978,<br /></div>
+                        <div class="one">"genre": [<br /></div>
+                        <div class="two">"comedy",<br /></div>
+                        <div class="two">"romance",<br /></div>
+                        <div class="two">"musical"<br /></div>
+                        <div class="one"> ],<br /></div>
+                        <div class="one">"director": {<br /></div>
+                        <div class="two">"name": "Randal Kleiser",<br /></div>
+                        <div class="two">"birth": 1946<br /></div>
+                        }<br />
+                        }
+                    </div>
+                    <br />
+                </td>
+            </tr>
+            <tr>
+                <td>Return data about a director (bio, birth year, death year) by name</td>
+                <td>/movies/director/:directorName</td>
+                <td>GET</td>
+                <td>none</td>
+                <td>JSON object holding the data about a specific director
+                    Example: <br />
+                    <br />
+                    <div class="code">{ <br />
+                        <div class="one"> "name": "Frank Tashlin",<br /></div>
+                        <div class="one">"birth": 1913<br /></div>
+                        <div class="one">"death": 1972<br /></div>
+                        }<br />
+                    </div>
+                    <br />
+                </td>
+            </tr>
+            <tr>
+                <td>Allow new users to register</td>
+                <td>/users</td>
+                <td>POST</td>
+                <td>JSON object holding the data about the newly registered user
+                    Example: <br />
+                    <br />
+                    <div class="code">{ <br />
+                        <div class="one"> "username": "Mary",<br /></div>
+                        <div class="one">"name": "Mary",<br /></div>
+                        <div class="one">"password": "password",<br /></div>
+                        <div class="one">"favorites": [],<br /></div>
+                        }<br />
+                    </div>
+                    <br />
+                </td>
+                <td>JSON object holding data about the newly added user and their ID
+                    Example: <br />
+                    <br />
+                    <div class="code">{ <br />
+                        <div class="one"> "username": "Mary",<br /></div>
+                        <div class="one">"name": "Mary",<br /></div>
+                        <div class="one">"password": "password",<br /></div>
+                        <div class="one">"favorites": [],<br /></div>
+                        <div class="one">"id": "990b9b7a-ffc5-41a9-9e2e-2ffae69037ee",<br /></div>
+                        }<br />
+                    </div>
+                    <br />
+                </td>
+            </tr>
+            <tr>
+                <td>Allow users to update their user info (username)</td>
+                <td>/users/:username</td>
+                <td>PUT</td>
+                <td>JSON object holding data about the updates to the user data
+                    Example: <br />
+                    <br />
+                    <div class="code">{ <br />
+                        <div class="one">"name": "Sam",<br /></div>
+                        }<br />
+                    </div>
+                    <br />
+                </td>
+                <td>JSON object holding the updated user data
+                    JSON object holding data about the newly added user and their ID
+                    Example: <br />
+                    <br />
+                    <div class="code">{ <br />
+                        <div class="one">"id": 2,<br /></div>
+                        <div class="one"> "username": "Sammy",<br /></div>
+                        <div class="one">"name": "Sam",<br /></div>
+                        <div class="one">"password": "password",<br /></div>
+                        <div class="one">"favorites": [ </div>
+                        <div class="two">"Scream",<br /></div>
+                        <div class="one">],<br /></div>
+                        }<br />
+                    </div>
+                    <br />
+                </td>
+            </tr>
+            <tr>
+                <td>Allow users to add a movie to their list of favorites </td>
+                <td>/users/:username/:movieTitle</td>
+                <td>POST</td>
+                <td>none</td>
+                <td>Text message that movie has been added to the user profile.</td>
+            </tr>
+            <tr>
+                <td>Allow users to remove a movie from their list of favorites</td>
+                <td>/users/:username/:movieTitle</td>
+                <td>DELETE</td>
+                <td>none</td>
+                <td>Text message that the movie has been deleted from the user profile.</td>
+            </tr>
+            <tr>
+                <td>Allow existing users to deregister </td>
+                <td>/users/:username</td>
+                <td>DELETE</td>
+                <td>none</td>
+                <td>Text message that the user has been deleted.</td>
+            </tr>
+        </tbody>
+
+    </table>
+
+</body>
+
+</html>
