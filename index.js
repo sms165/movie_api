@@ -82,18 +82,19 @@ app.get('/movies/:title', (req, res) => {
 
 // READ
 //return data about a genre by title
-app.get('/movies/genre/:genre', (req, res) => {
-    Movies.find()
-        .populate('genre')
-        
+app.get('/movies/genre/:genres', (req, res) => {
     Movies.find({
-        'genre.name' : 'req.params.genre'
+        //find by genreId
+        genre: req.params.genres
     })
   
     
+        .populate('genre')
         .then((movie) => {
-
-            res.json(movie);
+                res.json(movie);
+                
+            
+            
 
         })
 
@@ -106,15 +107,14 @@ app.get('/movies/genre/:genre', (req, res) => {
 
 //Read
 //return data about actor
-app.get('/movies/actor/:actors', (req, res) => {
-    Movies.find()
-    .populate('actors')
+app.get('/movies/actor/:actor', (req, res) => {
     Movies.find({
         //find by actorId
-        'actors.name': req.params.actors
+        actor: req.params.actor
     })
   
-   
+    
+        .populate('genre')
         .then((movie) => {
 
             res.json(movie);
