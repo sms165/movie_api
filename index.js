@@ -1,123 +1,14 @@
-//movie list
-let movies = [{
-        title: 'Pillow Talk',
-        year: 1959,
-        genre: ['comedy', 'romance'],
-        director: {
-            name: 'Michael Gordon',
-            birth: 1909,
-            death: 1993
-        }
-    },
-    {
-        title: 'The Glass Bottom Boat',
-        year: 1966,
-        genre: ['comedy', 'romance'],
-        director: {
-            name: 'Frank Tashlin',
-            birth: 1913,
-            death: 1972
-        }
-    },
-    {
-        title: 'Lover Come Back',
-        year: 1961,
-        genre: ['comedy', 'romance', 'drama'],
-        director: {
-            name: 'Delbert Mann',
-            birth: 1920,
-            death: 2007
-        }
-    },
-    {
-        title: 'Send Me No Flowers',
-        year: 1964,
-        genre: ['comedy', 'romance'],
-        director: {
-            name: 'Michael Gordon',
-            birth: 1909,
-            death: 1993
-        }
-    },
-    {
-        title: 'The Thrill of It All',
-        year: 1963,
-        genre: ['comedy', 'romance', 'drama'],
-        director: {
-            name: 'Norman Jewison',
-            birth: 1926,
-            death: undefined
-        }
-    },
-    {
-        title: 'The Pajama Game',
-        year: 1957,
-        genre: ['comedy', 'drama', 'musical'],
-        director: {
-            name: 'George Abbott',
-            birth: 1887,
-            death: 1995
-        }
-    },
-    {
-        title: 'Please Don\'t Eat the Daisies',
-        year: 1959,
-        genre: ['comedy', 'romance', 'family'],
-        director: {
-            name: 'Charles Walters',
-            birth: 1911,
-            death: 1982
-        }
-    },
-    {
-        title: 'How to Lose a Guy in 10 Days',
-        year: 2003,
-        genre: ['comedy', 'romance'],
-        director: {
-            name: 'Donald Petrie',
-            birth: 1954,
-            death: undefined
-        }
-    },
-    {
-        title: 'Grease',
-        year: 1978,
-        genre: ['comedy', 'romance', 'musical'],
-        director: {
-            name: 'Randal Kleiser',
-            birth: 1946,
-            death: undefined
-        }
-    },
-    {
-        title: 'Sweet Home Alabama',
-        year: 2002,
-        genre: ['comedy', 'romance'],
-        director: {
-            name: 'Andy Tennant',
-            birth: 1955,
-            death: undefined
-        }
-    },
+//integrating models:
+const mongoose = require('mongoose');
+const models = require('./models.js');
 
-];
+const Movies = models.Movie;
+const Users = models.User;
 
-// user list
-let users = [{
-        id: '1',
-        username: 'testUser',
-        name: 'Test User',
-        password: 'password',
-        favorites: ['Scream']
-    },
-    {
-        id: '2',
-        username: 'Sammy',
-        name: 'Sammy',
-        password: 'password',
-        favorites: ['Scream']
-    }
-];
+//connect to the database myFlixDb
+mongoose.connect('mongodb://localhost:27017/myFlixDb' ,{
+    useNewUrlParser: true, useUnifiedTopology: true
+});
 
 
 
@@ -165,22 +56,38 @@ app.use(express.static('public'));
 // READ
 //url /movies returns movies in json format
 app.get('/movies', (req, res) => {
-    res.status(200).json(movies);
+    Movies.find()
+    .then((movies) => {
+        res.status(201).json(movies);
+    })
+    .catch((err)=>{
+        console.error(err);
+        res.status(500).send('Error: '+err);
+    });
+    // res.status(200).json(movies);
 });
 
 // READ
 // return data about a single movie by title
 app.get('/movies/:title', (req, res) => {
-    const {
-        title
-    } = req.params;
-    const movie = movies.find(movie => movie.title === title);
+    Movies.findOne({title: req.params.title})
+    .then((movie)=>{
+        res.json(title);
+    })
+    .catch((err) =>{
+        console.error(err);
+        res.status(500).send('Error: ' +err);
+    });
+    // const {
+    //     title
+    // } = req.params;
+    // const movie = movies.find(movie => movie.title === title);
 
-    if (movie) {
-        res.status(200).json(movie);
-    } else {
-        res.status(400).send("Movie is not found")
-    }
+    // if (movie) {
+    //     res.status(200).json(movie);
+    // } else {
+    //     res.status(400).send("Movie is not found")
+    // }
 
 });
 
@@ -223,18 +130,56 @@ app.get('/movies/director/:directorName', (req, res) => {
 
 // CREATE
 //add new user
-app.post('/users', (req, res) => {
-    const newUser = req.body;
 
-    if (!newUser.username) {
-        const message = 'Missing username in request body';
-        res.status(400).send(message);
-    } else {
-        newUser.id = uuid.v4();
-        users.push(newUser);
-        res.status(201).send(newUser);
-    }
-})
+// JSON format:
+// {
+//     id: Integer ,
+//     name: String,
+//     userName: String,
+//     email: String,
+//     birthday: Data 
+// }
+app.post('/users', (req, res) => {
+    Users.findOne({userName: req.body.userName})
+    .then((user)=>{
+        if(user){
+            return res.status(400).send(req.body.userName + 'already exists');
+        }else{
+            Users
+            .create({
+                name: req.body.name,
+                userName: req.body.userName,
+                password: req.body.password,
+                email: req.body.email,
+                birthday: req.body.birthday
+            })
+            .then((user) =>{res.status(201).json(user) })
+            .catch((error) =>{
+                console.error(error);
+                res.status(500).send('Error: ' + error);
+            })
+        }
+        })
+        .catch((error)=>{
+            console.error(error);
+            res.status(500).send('Error: '+ error);
+        });
+    });
+    // const newUser = req.body;
+
+    // if (!newUser.username) {
+    //     const message = 'Missing username in request body';
+    //     res.status(400).send(message);
+    // } else {
+    //     newUser.id = uuid.v4();
+    //     users.push(newUser);
+    //     res.status(201).send(newUser);
+    // }
+
+
+
+
+
 
 // UPDATE
 // update user info: username
