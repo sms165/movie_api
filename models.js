@@ -1,8 +1,7 @@
-const { stringify } = require("uuid");
-
 const mongoose = require('mongoose');
 
 let genreSchema = mongoose.Schema({
+    type: mongoose.Schema.Types.ObjectId,
     name: {type:String, required:true},
     description: {type:String, required:true}
 })
