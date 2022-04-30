@@ -83,20 +83,27 @@ app.get('/movies/:title', (req, res) => {
 // READ
 //return data about a genre by title
 app.get('/movies/genre/:genres', (req, res) => {
-    Movies.find({
-        //find by genreId
-        genre: req.params.genres
-    })
-  
-    
-        .populate('genre')
-        .then((movie) => {
-                res.json(movie);
-                
-            
-            
 
+    Movies.find({
+            //find by genreId
+            //genre: req.params.genres
         })
+
+
+        .populate({
+            path: 'genre',
+            match: {
+                name: req.params.genres
+            }
+        })
+
+
+        .then((movie) => {
+
+            const moviesWithGenres = movie.filter(item => item.genre.length > 0)
+            res.json(moviesWithGenres);
+        })
+
 
         .catch((err) => {
             console.error(err);
@@ -109,16 +116,22 @@ app.get('/movies/genre/:genres', (req, res) => {
 //return data about actor
 app.get('/movies/actor/:actor', (req, res) => {
     Movies.find({
-        //find by actorId
-        actor: req.params.actor
-    })
-  
-    
-        .populate('genre')
+            //find by actorId
+            //actor: req.params.actor
+        })
+
+
+        .populate({
+            path: 'actors',
+            match: {
+                name: req.params.actor
+            }
+        })
         .then((movie) => {
 
-            res.json(movie);
-
+            const moviesWithActor = movie.filter(item => item.actors.length > 0);
+            res.send(moviesWithActor);
+           
         })
 
         .catch((err) => {
@@ -137,6 +150,22 @@ app.get('/movies/director/:directorName', (req, res) => {
         })
         .then((directorName) => {
             res.json(directorName);
+        })
+        .catch((err) => {
+            console.error(err);
+            res.status(500).send('Error: ' + err);
+        });
+
+});
+
+//READ
+//return data about user
+app.get('/users/:userName', (req, res) => {
+    Users.findOne({
+            userName : req.params.userName
+        })
+        .then((user) => {
+            res.json(user);
         })
         .catch((err) => {
             console.error(err);
@@ -239,7 +268,7 @@ app.post('/users/:username/:movieId', (req, res) => {
 
 // DELETE
 //allow user to remove a movie from their favorites list
-app.delete('/users/:username/:movieTitle', (req, res) => {
+app.delete('/users/:username/:movieId', (req, res) => {
     Users.findOneAndUpdate({
             userName: req.params.username
         }, {
