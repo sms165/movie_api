@@ -52,6 +52,8 @@ reading data from requests and morgan for logging.
 
 # Middleware
 * Passport : authentication middleware for Node.js and Express
+** HTTP authentication
+** JWT authentication
 
 # Runtime environment
 * Node.js
