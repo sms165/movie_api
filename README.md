@@ -42,9 +42,16 @@ reading data from requests and morgan for logging.
 # Technologies
 * HTML
 * CSS
-* Jacascript
+* Javascript
+
+# Database
+* MongoDb
 
 # Libraries
+* Mongoose : Object Data Modeling
+
+# Middleware
+* Passport : authentication middleware for Node.js and Express
 
 # Runtime environment
 * Node.js
