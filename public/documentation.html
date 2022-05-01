@@ -5,14 +5,21 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com"> 
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+<link href="https://fonts.googleapis.com/css2?family=Inter&family=Roboto:wght@100;700&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="../style.css">
     <title>Documentation</title>
 
 </head>
 
 <body>
-    <h1>My flix</h1>
-    <h2>Goal:</h2>
+    <header>
+        <h1>My flix</h1>
+    <h2>API Documentation</h2>
+    </header>
+    
     <p>To build the server-side component of a “movies” web application. The web application will provide users with
         access to information about different movies, directors, and genres. Users will be able to sign up, update their
         personal information, and create a list of their favorite movies.</p>
@@ -104,6 +111,7 @@
                     <br />
                 </td>
             </tr>
+    
             <tr>
                 <td>Return data about a director (bio, birth year, death year) by name</td>
                 <td>/movies/director/:directorName</td>
@@ -122,6 +130,26 @@
                 </td>
             </tr>
             <tr>
+                <td>Return data about a user by userName</td>
+                <td>/users/:userName</td>
+                <td>GET</td>
+                <td>none</td>
+                <td>JSON object holding the data about a specific director
+                    Example: <br />
+                    <br />
+                    <div class="code">{ <br />
+                        <div class="one"> "userName": "Mary",<br /></div>
+                        <div class="one">"name": "Mary",<br /></div>
+                        <div class="one">"password": "password",<br /></div>
+                        <div class="one">"email": "mary@example.com",<br /></div>
+                        <div class="one">"favorites": [],<br /></div>
+                        <div class="one">"id": "990b9b7a-ffc5-41a9-9e2e-2ffae69037ee",<br /></div>
+                        }<br />
+                    </div>
+                    <br />
+                </td>
+            </tr>
+            <tr>
                 <td>Allow new users to register</td>
                 <td>/users</td>
                 <td>POST</td>
@@ -129,7 +157,7 @@
                     Example: <br />
                     <br />
                     <div class="code">{ <br />
-                        <div class="one"> "username": "Mary",<br /></div>
+                        <div class="one"> "userName": "Mary",<br /></div>
                         <div class="one">"name": "Mary",<br /></div>
                         <div class="one">"password": "password",<br /></div>
                         <div class="one">"favorites": [],<br /></div>
@@ -141,7 +169,7 @@
                     Example: <br />
                     <br />
                     <div class="code">{ <br />
-                        <div class="one"> "username": "Mary",<br /></div>
+                        <div class="one"> "userName": "Mary",<br /></div>
                         <div class="one">"name": "Mary",<br /></div>
                         <div class="one">"password": "password",<br /></div>
                         <div class="one">"favorites": [],<br /></div>
