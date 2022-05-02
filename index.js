@@ -6,7 +6,7 @@ const Movies = models.Movie;
 const Users = models.User;
 
 //connect to the database myFlixDb
-mongoose.connect('mongodb://localhost:27017/myFlixDb', {
+mongoose.connect(process.env.CONNECTION_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
@@ -244,12 +244,14 @@ app.post('/users', [
         check('email', 'Email does not appear to be valid').isEmail()
     ],
     (req, res) => {
-        
+
         //check validation
         let errors = validationResult(req);
 
-        if(!errors.isEmpty()){
-            return res.status(422).json({errors: errors.array()});
+        if (!errors.isEmpty()) {
+            return res.status(422).json({
+                errors: errors.array()
+            });
         }
 
         //hash password before storing it in the MongoDB database
@@ -397,6 +399,6 @@ app.use((err, req, res, next) => {
 // });
 
 const port = process.env.PORT || 8080;
-app.listen(port, '0.0.0.0',() =>{
+app.listen(port, '0.0.0.0', () => {
     console.log('Listening on Port ' + port);
 });
