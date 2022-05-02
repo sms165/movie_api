@@ -11,6 +11,12 @@ mongoose.connect(process.env.CONNECTION_URI, {
     useUnifiedTopology: true
 });
 
+// localhost
+// mongoose.connect('mongodb://localhost:27017/myFlixDb', {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true
+// });
+
 
 
 const express = require('express');
