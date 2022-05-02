@@ -49,6 +49,7 @@ reading data from requests and morgan for logging.
 
 # Libraries
 * Mongoose : Object Data Modeling
+* express-validator : validation methods for input data
 
 # Middleware
 * Passport : authentication middleware for Node.js and Express
