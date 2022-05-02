@@ -62,6 +62,7 @@ reading data from requests and morgan for logging.
 * Express 
 * body-parser
 * morgan : logging middleware (information about request)
+* bcrypt : password hasher for node.js
 
 # Testing API endpoints
 * Postman
