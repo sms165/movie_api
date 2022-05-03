@@ -1,18 +1,18 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
-// let genreSchema = mongoose.Schema({
-//     type: mongoose.Schema.Types.ObjectId,
-//     name: {type:String, required:true},
-//     description: {type:String, required:true}
-// });
+let genreSchema = mongoose.Schema({
+    type: mongoose.Schema.Types.ObjectId,
+    name: {type:String, required:true},
+    description: {type:String, required:true}
+});
 
-// let actorSchema = mongoose.Schema({
-//     name: {type:String, required:true},
-//     bio: String,
-//     birthYear:Date,
-//     deathYear:Date
-// });
+let actorSchema = mongoose.Schema({
+    name: {type:String, required:true},
+    bio: String,
+    birthYear:Date,
+    deathYear:Date
+});
 
 let movieSchema = mongoose.Schema({
     title: {type: String, required: true},
