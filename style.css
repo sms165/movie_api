@@ -1,8 +1,34 @@
+.container{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    grid-template-rows: auto;
+    grid-template-areas: 
+    "header header header header"
+    "sidebar main main main"
+    "footer footer footer footer";
+}
+
 /* header */
 header{
-    background-color: #2A6F97;
+    grid-area: header;
+    background-image: url("img/filmstrip.jpg");
+    
+    background-position: center;
+    
     height: 20vh;
     
+}
+
+.sidebar{
+    grid-area: sidebar;
+}
+
+main{
+    grid-area: main;
+}
+
+footer{
+    grid-area: footer;
 }
 
 h1{

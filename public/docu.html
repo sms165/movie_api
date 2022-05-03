@@ -52,13 +52,33 @@
         Director: {
           Name: String,
           Bio: String
-        }
+        },
         Featured: Boolean,
         ImageUrl: String
       }
               </pre>
             </td>
           </tr>
+          <th>Response data example</th>
+          <td>
+            <pre>
+              {
+                Title: String,
+                Director: String,
+                Stars: [String],
+                Genre: {
+                  Name: String,
+                  Description: String
+                },
+                Director: {
+                  Name: String,
+                  Bio: String
+                },
+                Featured: Boolean,
+                ImageUrl: String
+              }
+                      </pre>
+          </td>
           <tr>
             <td>GET</td>
             <td>/movies/[title]</td>

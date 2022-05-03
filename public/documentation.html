@@ -5,9 +5,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com"> 
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
-<link href="https://fonts.googleapis.com/css2?family=Inter&family=Roboto:wght@100;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter&family=Roboto:wght@100;700&display=swap"
+        rel="stylesheet">
 
     <link rel="stylesheet" href="../style.css">
     <title>Documentation</title>
@@ -15,20 +16,406 @@
 </head>
 
 <body>
-    <header>
-        <h1>My flix</h1>
-    <h2>API Documentation</h2>
-    </header>
+    <div class="container">
+        <header>
+            <h1>myFlix</h1>
+            <h2>API Documentation</h2>
+        </header>
+
+        <div class="sidebar">
+
+        </div>
+
+        <main>
+            <h2>Description</h2>
+
+            <p>To build the server-side component of a “movies” web application an API was created. The web application
+                will provide users with
+                access to information about different movies, directors, and genres. Users will be able to sign up,
+                update their
+                personal information, and create a list of their favorite movies. </p>
+            <p>This documentation is to explain and showcase the different API points available and how to access them.
+            </p>
+            <h2>Routes</h2>
+            <p>URL Endpoints and request methods</p>
+
+            <!-- Business Logic, URL, HTTP method, Request body data format, Response body data format -->
+
+
+            <h3>Login</h3>
+            <p>Login for registered users to gain access to the API endpoints.</p>
+            <div class="endpoint">
+                <h4>POST</h4>
+                <table>
+                    <tr>
+                        <th>Route</th>
+                        <td>/login</td>
+                    </tr>
+                    <tr>
+                        <th>Description</th>
+                        <td>Returns a json object of the user and its details including JWT token for authentication</td>
+                    </tr>
+                    <tr>
+                        <th>Request data</th>
+                        <td><p>Paramters format:</p> 
+                            <table>
+                                <th>Key</th>
+                                <th>Value</th>
+                            <tr>
+                            <td>userName</td>
+                            <td>String</td>
+                        </tr>
+                        <tr>
+                            <td><p>password</p></td>
+                            <td>String</td>
+                        </tr>
+                    </table>
+                    <td><p>Paramters example:</p> 
+                        <table>
+                            <th>Key</th>
+                            <th>Value</th>
+                        <tr>
+                        <td>userName</td>
+                        <td>testuser</td>
+                    </tr>
+                    <tr>
+                        <td><p>password</p></td>
+                        <td>password</td>
+                    </tr>
+                </table>
+                       </td>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>Response data</th>
+                        <td><p>Format of JSON Object:</p>
+                         <pre>
+{
     
-    <p>To build the server-side component of a “movies” web application. The web application will provide users with
-        access to information about different movies, directors, and genres. Users will be able to sign up, update their
-        personal information, and create a list of their favorite movies.</p>
-    <h3>Routes</h3>
-    <h4>URL Endpoints and request methods</h4>
+    user:{
+        name: String,
+        userName: String,
+        password: String,
+        email: String,
+        birthday: Date,
+        favorites: Array,
+        _id: ObjectId
+                                
+},
+    token: String
+}
+                        </pre>
 
-    <!-- Business Logic, URL, HTTP method, Request body data format, Response body data format -->
+                        </td>
+                        <td><p>Example of JSON Object</p>
+                            <pre>
+{
+    "user": {
+        "name": "testuser",
+        "userName": "testuser",
+        "pas"$2b$10$LpKeTPhygdPltfG8XrmYBuDKZTouKfWNJqwga2uwYNx3tYSmzmy8y",
+        "email": "testuser@example.com",
+        "birthday": "1999-05-02T00:00:00.000Z",
+        "favorites": [],
+        "_id": "62713a9ddfaf6d76873277b2"                                   
+},
+    "token": ""eyXhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjcxM2E5ZGRmYWY2ZDc2ODczMjc3YjIiLCJuYW1lIjoidGVzdHVzZXI1IiwidXNlck5hbWUiOiJ0ZXN0dXNlcjUiLCJwYXNzd29yZCI6IiQyYiQxMCRMcEtlVFBoeWdkUGx0Zkc4WHJtWUJ1REtaVG91S2ZXTkpxd2dhMnV3WU54M3RZU216bXk4eSIsImVtYWlsIjoidGVzdHVzZXI0QGV4YW1wbGUuY29tIiwiYmlydGhkYXkiOiIxOTk5LTA1LTAyVDAwOjAwOjAwLjAwMFoiLCJmYXZvcml0ZXMiOltdLCJfX3YiOjAsImlhdCI6MTY1MTU4ODgwNSwiZXhwIjoxNjUyMTkzNjA1LCJzdWIiOiJ0ZXN0dXNlcjUifQ.5luhq3RXg7R1-NsTTgSqkPKmDa9Dp-Kas0vz0k5ZZRY""
+}
+                            </pre>
+                        </td>
+                    </tr>
+                    
+                    
+                </table>
 
-    <table>
+
+            <h3>Movies</h3>
+            <p>Directory contains all the movie related APIs.</p>
+            <div class="endpoint">
+                <h4>GET</h4>
+                <table>
+                    <tr>
+                        <th>Route</th>
+                        <td>/movies</td>
+                    </tr>
+                    <tr>
+                        <th>Description</th>
+                        <td>Returns a json list of all the movies saved in the databse and its attributes</td>
+                    </tr>
+                    <tr>
+                        <th>Response data</th>
+                        <td>JSON Object format of one movie
+                            <pre>
+{
+    _id: ObjectId,
+    title: String,
+    description: String,
+    imageUrl: String,
+    featured: Boolean,
+    genre: [Array],
+    director: { 
+        name: String,
+        bio: String,
+        birthYear: Date,
+        deathYear: Date
+        }
+    actors:[Array]
+}
+                        </pre>
+                        </td>
+                        <td>JSON Object example
+                        
+                            <p>If not logged in:<br>
+                                unauthorized</p>
+                            <p> If logged in: ()
+                                <pre>
+[
+    {
+        "_id": "626447£5915d60485d2e243f",
+        "title": "Pillow Talk",
+        "description": "An interior decorator and a playboy songwriter share a telephone party line and size each other up.",
+        "imageUrl": "https://en.wikipedia.org/wiki/Pillow_Talk_(film)#/media/File:Pillow_Talk_(1959_poster).jpg",
+        "featured": true,
+        "genre": [
+            "6263ac69915d60485d2e243a",
+            "6263ac9f915d60485d2e243b"
+        ],
+        "director": { 
+            name: "Michael Gordon",
+            bio: "Director, Michael Gordon, was born Irving Kunin Gordon on Sep 6, 1909 in Baltimore, MD. Gordon died at the age of 83 on Apr 23, 1993 in Century City, CA and was laid to rest in Mount Sinai Memorial Park Cemetery in Los Angeles, CA.",
+            birthYear: "1909-09-06T00:00:00.000Z",
+            deathYear: "1993-04-29T00:00:00.000Z"
+        }
+        "actors":[
+            "6263aa94915d60485d2e2438",
+            "6263a2a6915d60485d2e2435"
+        ]
+
+    }, ...
+                                        </pre>
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="endpoint">
+                <h4>GET</h4>
+                <table>
+                    <tr>
+                        <th>Route</th>
+                        <td>/movies/[title]</td>
+                    </tr>
+                    <tr>
+                        <th>Description</th>
+                        <td>Returns a json object with the details for the queried movie</td>
+                    </tr>
+                    <tr>
+                        <th>Response data</th>
+                        <td>JSON Object format
+                            <pre>
+{
+    _id: ObjectId,
+    title: String,
+    description: String,
+    imageUrl: String,
+    featured: Boolean,
+    genre: [Array],
+    director: { 
+        name: String,
+        bio: String,
+        birthYear: Date,
+        deathYear: Date
+        }
+    actors:[Array]
+}
+                        </pre>
+                        </td>
+                        <td>JSON Object example
+                        
+                            <p>If not logged in:<br>
+                                unauthorized</p>
+                            <p> If logged in:
+                                <pre>
+{
+    _id: "626447£5915d60485d2e243f",
+    title: "Pillow Talk",
+    description: "An interior decorator and a playboy songwriter share a telephone party line and size each other up.",
+    imageUrl: "https://en.wikipedia.org/wiki/Pillow_Talk_(film)#/media/File:Pillow_Talk_(1959_poster).jpg",
+    featured: true,
+    genre: [
+        "6263ac69915d60485d2e243a",
+        "6263ac9f915d60485d2e243b"
+    ],
+    director: { 
+        name: "Michael Gordon",
+        bio: "Director, Michael Gordon, was born Irving Kunin Gordon on Sep 6, 1909 in Baltimore, MD. Gordon died at the age of 83 on Apr 23, 1993 in Century City, CA and was laid to rest in Mount Sinai Memorial Park Cemetery in Los Angeles, CA.",
+        birthYear: "1909-09-06T00:00:00.000Z",
+        deathYear: "1993-04-29T00:00:00.000Z"
+    }
+    actors:[
+        "6263aa94915d60485d2e2438",
+        "6263a2a6915d60485d2e2435"
+    ]
+
+}
+                                        </pre>
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="endpoint">
+                <h4>GET</h4>
+                <table>
+                    <tr>
+                        <th>Route</th>
+                        <td>/movies/genre/[genre]</td>
+                    </tr>
+                    <tr>
+                        <th>Description</th>
+                        <td>Returns a json list of all the movies with the searched for genre</td>
+                    </tr>
+                    <tr>
+                        <th>Response data</th>
+                        <td>JSON Object format
+                            <pre>
+{
+    _id: ObjectId,
+    title: String,
+    description: String,
+    imageUrl: String,
+    featured: Boolean,
+    genre: [Array],
+    director: { 
+        name: String,
+        bio: String,
+        birthYear: Date,
+        deathYear: Date
+        }
+    actors:[Array]
+}
+                        </pre>
+                        </td>
+                        <td>JSON Object example
+                        
+                            <p>If not logged in:<br>
+                                unauthorized</p>
+                            <p> If logged in:
+                                <pre>
+{
+    _id: "626447£5915d60485d2e243f",
+    title: "Pillow Talk",
+    description: "An interior decorator and a playboy songwriter share a telephone party line and size each other up.",
+    imageUrl: "https://en.wikipedia.org/wiki/Pillow_Talk_(film)#/media/File:Pillow_Talk_(1959_poster).jpg",
+    featured: true,
+    genre: [
+        "6263ac69915d60485d2e243a",
+        "6263ac9f915d60485d2e243b"
+    ],
+    director: { 
+        name: "Michael Gordon",
+        bio: "Director, Michael Gordon, was born Irving Kunin Gordon on Sep 6, 1909 in Baltimore, MD. Gordon died at the age of 83 on Apr 23, 1993 in Century City, CA and was laid to rest in Mount Sinai Memorial Park Cemetery in Los Angeles, CA.",
+        birthYear: "1909-09-06T00:00:00.000Z",
+        deathYear: "1993-04-29T00:00:00.000Z"
+    }
+    actors:[
+        "6263aa94915d60485d2e2438",
+        "6263a2a6915d60485d2e2435"
+    ]
+
+}
+                                        </pre>
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+
+            <h3>Users</h3>
+            <p>Directory contains all the user related APIs.</p>
+            <div class="endpoint">
+                <h4>POST</h4>
+                <table>
+                    <tr>
+                        <th>Route</th>
+                        <td>/users</td>
+                    </tr>
+                    <tr>
+                        <th>Description</th>
+                        <td>Creates a new user</td>
+                    </tr>
+                    <tr>
+                        <th>Request data </th>
+                        <td><p> Format:</p>
+                           
+                               <pre>
+{
+    name: String,
+    userName: String,
+    password: String,
+    email: String,
+    birthday: Date
+
+}
+
+                               </pre>
+                           
+                            </td>
+                            <td><p>Example:</p>
+                               <pre>
+{
+    "name": "testuser",
+    "userName": "testuser",
+    "pasword": "password",
+    "email": "testuser@example.com",
+    "birthday": "1999-05-02T00:00:00.000Z",
+    "favorites": [],                                  
+}
+                               </pre>
+                           </td>
+                        
+                    </tr>
+                    <tr>
+                        <th>Response data</th>
+                        <td><p>Format of JSON Object:</p>
+                            <pre>
+{
+    name: String,
+    userName: String,
+    password: String,
+    email: String,
+    birthday: Date,
+    favorites: Array,
+    _id: ObjectId
+                                
+}
+                        </pre>
+
+                        </td>
+                        <td><p>Example of JSON Object</p>
+                            <pre>
+{
+    "name": "testuser",
+    "userName": "testuser",
+    "pas"$2b$10$LpKeTPhygdPltfG8XrmYBuDKZTouKfWNJqwga2uwYNx3tYSmzmy8y",
+    "email": "testuser@example.com",
+    "birthday": "1999-05-02T00:00:00.000Z",
+    "favorites": [],
+    "_id": "62713a9ddfaf6d76873277b2"                                   
+}
+                            </pre>
+                        </td>
+                    </tr>
+                    
+                </table>
+            </div>
+
+
+            <!-- <table>
         <thead>
             <th>Business Logic</th>
             <th>URL</th>
@@ -232,8 +619,13 @@
             </tr>
         </tbody>
 
-    </table>
+    </table> -->
+        </main>
 
+        <footer>
+
+        </footer>
+    </div>
 </body>
 
 </html>

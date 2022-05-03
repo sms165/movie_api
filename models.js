@@ -48,13 +48,13 @@ userSchema.methods.validatePassword = function(password){
 
 //create collections: titles will come out as lowercase and pluralized
 //Actor will create a collection called db.actors
-// let Actor = mongoose.model('Actor', actorSchema);
-// let Genre = mongoose.model('Genre', genreSchema);
+let Actor = mongoose.model('Actor', actorSchema);
+let Genre = mongoose.model('Genre', genreSchema);
 let Movie = mongoose.model('Movie', movieSchema);
 let User = mongoose.model('User', userSchema);
 
 //export the models, allows importing on index.js
-// module.exports.Actor = Actor;
-// module.exports.Genre = Genre
+module.exports.Actor = Actor;
+module.exports.Genre = Genre;
 module.exports.Movie = Movie;
 module.exports.User = User;
