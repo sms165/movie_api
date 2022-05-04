@@ -7,8 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter&family=Roboto:wght@100;700&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400&family=Quicksand&display=swap"
         rel="stylesheet">
+    <!-- hamburger menu -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    
 
     <link rel="stylesheet" href="../style.css">
     <title>Documentation</title>
@@ -18,79 +22,113 @@
 <body>
     <div class="container">
         <header>
-            <h1>myFlix</h1>
-            <h2>API Documentation</h2>
+            <img src="../img/myFlix.svg" alt="myFlix logo" class="logo">
+            <div class="bar">
+                <h2>API Documentation</h2>
+            </div>
+
         </header>
+        <nav>
+            <div class="topnav">
+                <!-- <a href="#home" class="active"></a> -->
 
-        <div class="sidebar">
+                <!-- "Hamburger menu" / "Bar icon" to toggle the navigation links -->
+                <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+                    <i class="fa fa-bars"></i>
+                </a>
+                <!-- Navigation links (hidden by default) -->
+                <div id="links">
+                    <a href="#login">Login</a>
+                    <a href="#movies">Movies</a>
+                    <a href="#users">Users</a>
+                </div>
+            </div>
+        </nav>
 
-        </div>
 
         <main>
-            <h2>Description</h2>
+            <h2 class="font">Description</h2>
 
-            <p>To build the server-side component of a “movies” web application an API was created. The web application
+            <p class="font">To build the server-side component of a “movies” web application an API was created. The web
+                application
                 will provide users with
                 access to information about different movies, directors, and genres. Users will be able to sign up,
                 update their
                 personal information, and create a list of their favorite movies. </p>
-            <p>This documentation is to explain and showcase the different API points available and how to access them.
+            <p class="font">This documentation is to explain and showcase the different API points available and how to
+                access them.
             </p>
-            <h2>Routes</h2>
-            <p>URL Endpoints and request methods</p>
+            <h2 class="font">Routes</h2>
+            <p class="font">URL Endpoints and request methods</p>
 
             <!-- Business Logic, URL, HTTP method, Request body data format, Response body data format -->
 
 
-            <h3>Login</h3>
-            <p>Login for registered users to gain access to the API endpoints.</p>
+            <h3 class="font" id="login">Login</h3>
+            <p class="font">Login for registered users to gain access to the API endpoints.</p>
             <div class="endpoint">
-                <h4>POST</h4>
+                <h4 class="post">POST</h4>
                 <table>
                     <tr>
                         <th>Route</th>
                         <td>/login</td>
                     </tr>
                     <tr>
-                        <th>Description</th>
-                        <td>Returns a json object of the user and its details including JWT token for authentication</td>
+                        <th>
+                            <p>Description</p>
+                        </th>
+                        <td>
+                            <p>Returns a json object of the user and its details including JWT token for authentication
+                            </p>
+                        </td>
                     </tr>
                     <tr>
-                        <th>Request data</th>
-                        <td><p>Paramters format:</p> 
+                        <th>
+                            <p>Request data</p>
+                        </th>
+                        <td>
+                            <p>Paramters format:</p>
                             <table>
                                 <th>Key</th>
                                 <th>Value</th>
-                            <tr>
-                            <td>userName</td>
-                            <td>String</td>
-                        </tr>
-                        <tr>
-                            <td><p>password</p></td>
-                            <td>String</td>
-                        </tr>
-                    </table>
-                    <td><p>Paramters example:</p> 
-                        <table>
-                            <th>Key</th>
-                            <th>Value</th>
-                        <tr>
-                        <td>userName</td>
-                        <td>testuser</td>
-                    </tr>
-                    <tr>
-                        <td><p>password</p></td>
-                        <td>password</td>
-                    </tr>
-                </table>
-                       </td>
+                                <tr>
+                                    <td>userName</td>
+                                    <td>String</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p>password</p>
+                                    </td>
+                                    <td>String</td>
+                                </tr>
+                            </table>
+                        <td>
+                            <p>Paramters example:</p>
+                            <table>
+                                <th>Key</th>
+                                <th>Value</th>
+                                <tr>
+                                    <td>userName</td>
+                                    <td>testuser</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <p>password</p>
+                                    </td>
+                                    <td>password</td>
+                                </tr>
+                            </table>
+                        </td>
                         </td>
                     </tr>
 
                     <tr>
-                        <th>Response data</th>
-                        <td><p>Format of JSON Object:</p>
-                         <pre>
+                        <th>
+                            <p>Response data</p>
+                        </th>
+                        <td>
+                            <p>Format of JSON Object:</p>
+                            <pre>
 {
     
     user:{
@@ -105,11 +143,13 @@
 },
     token: String
 }
-                        </pre>
+
+                            </pre>
 
                         </td>
-                        <td><p>Example of JSON Object</p>
-                            <pre>
+                        <td>
+                            <p>Example of JSON Object</p>
+                            <pre class="example">
 {
     "user": {
         "name": "testuser",
@@ -120,34 +160,50 @@
         "favorites": [],
         "_id": "62713a9ddfaf6d76873277b2"                                   
 },
-    "token": ""eyXhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjcxM2E5ZGRmYWY2ZDc2ODczMjc3YjIiLCJuYW1lIjoidGVzdHVzZXI1IiwidXNlck5hbWUiOiJ0ZXN0dXNlcjUiLCJwYXNzd29yZCI6IiQyYiQxMCRMcEtlVFBoeWdkUGx0Zkc4WHJtWUJ1REtaVG91S2ZXTkpxd2dhMnV3WU54M3RZU216bXk4eSIsImVtYWlsIjoidGVzdHVzZXI0QGV4YW1wbGUuY29tIiwiYmlydGhkYXkiOiIxOTk5LTA1LTAyVDAwOjAwOjAwLjAwMFoiLCJmYXZvcml0ZXMiOltdLCJfX3YiOjAsImlhdCI6MTY1MTU4ODgwNSwiZXhwIjoxNjUyMTkzNjA1LCJzdWIiOiJ0ZXN0dXNlcjUifQ.5luhq3RXg7R1-NsTTgSqkPKmDa9Dp-Kas0vz0k5ZZRY""
+    "token": ""eyXhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQ
+    iOiI2MjcxM2E5ZGRmYWY2ZDc2ODczMjc3YjIiLCJuYW1lIjoidGVzdHVzZX
+    I1IiwidXNlck5hbWUiOiJ0ZXN0dXNlcjUiLCJwYXNzd29yZCI6IiQyYiQ
+    xMCRMcEtlVFBoeWdkUGx0Zkc4WHJtWUJ1REtaVG91S2ZXTkpxd2dhMnV
+    3WU54M3RZU216bXk4eSIsImVtYWlsIjoidGVzdHVzZXI0QGV4YW1wbGU
+    uY29tIiwiYmlydGhkYXkiOiIxOTk5LTA1LTAyVDAwOjAwOjAwLjAwMFo
+    iLCJmYXZvcml0ZXMiOltdLCJfX3YiOjAsImlhdCI6MTY1MTU4ODgwN
+    SwiZXhwIjoxNjUyMTkzNjA1LCJzdWIiOiJ0ZXN0dXNlcjUifQ.
+    5luhq3RXg7R1-NsTTgSqkPKmDa9Dp-Kas0vz0k5ZZRY""
 }
-                            </pre>
+</pre>
                         </td>
                     </tr>
-                    
-                    
+
+
                 </table>
             </div>
 
 
-            <h3>Movies</h3>
-            <p>Directory contains all the movie related APIs.</p>
+            <h3 class="font" id="movies">Movies</h3>
+            <p class="font">Directory contains all the movie related APIs.</p>
             <div class="endpoint">
-                <h4>GET</h4>
-                <table>
-                    <tr>
-                        <th>Route</th>
-                        <td>/movies</td>
-                    </tr>
-                    <tr>
-                        <th>Description</th>
-                        <td>Returns a json list of all the movies saved in the databse and its attributes</td>
-                    </tr>
-                    <tr>
-                        <th>Response data</th>
-                        <td>JSON Object format of one movie
-                            <pre>
+                <h4 class="get">GET</h4>
+                <div style="overflow-x:auto;">
+                    <table>
+                        <tr>
+                            <th>Route</th>
+                            <td>/movies</td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <p>Description</p>
+                            </th>
+                            <td>
+                                <p>Returns a json list of all the movies saved in the databse and its attributes</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <p>Response data</p>
+                            </th>
+                            <td>
+                                <p> JSON Object format of one movie</p>
+                                <pre>
 {
     _id: ObjectId,
     title: String,
@@ -164,13 +220,15 @@
     actors:[Array]
 }
                         </pre>
-                        </td>
-                        <td>JSON Object example
-                        
-                            <p>If not logged in:<br>
-                                unauthorized</p>
-                            <p> If logged in: ()
-                                <pre>
+                            </td>
+                            <td>
+                                <p>JSON Object example</p>
+
+                                <p>If not logged in:<br>
+                                    unauthorized</p>
+                                <p> If logged in:
+                                    <div class="test">
+                                        <pre class="example">
 [
     {
         "_id": "626447£5915d60485d2e243f",
@@ -195,27 +253,37 @@
 
     }, ...
                                         </pre>
-                            </p>
-                        </td>
-                    </tr>
-                </table>
+                                    </div>
+                                </p>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
             </div>
 
             <div class="endpoint">
-                <h4>GET</h4>
-                <table>
-                    <tr>
-                        <th>Route</th>
-                        <td>/movies/[title]</td>
-                    </tr>
-                    <tr>
-                        <th>Description</th>
-                        <td>Returns a json object with the details for the queried movie</td>
-                    </tr>
-                    <tr>
-                        <th>Response data</th>
-                        <td>JSON Object format
-                            <pre>
+                <h4 class="get">GET</h4>
+                <div style="overflow-x:auto;">
+                    <table>
+                        <tr>
+                            <th>Route</th>
+                            <td>/movies/[title]</td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <p>Description</p>
+                            </th>
+                            <td>
+                                <p>Returns a json object with the details for the queried movie</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <p>Response data</p>
+                            </th>
+                            <td>
+                                <p>JSON Object format</p>
+                                <pre>
 {
     _id: ObjectId,
     title: String,
@@ -232,28 +300,29 @@
     actors:[Array]
 }
                         </pre>
-                        </td>
-                        <td>JSON Object example
-                        
-                            <p>If not logged in:<br>
-                                unauthorized</p>
-                            <p> If logged in:
-                                <pre>
+                            </td>
+                            <td>
+                                <p>JSON Object example</p>
+
+                                <p>If not logged in:<br>
+                                    unauthorized</p>
+                                <p> If logged in: [Grease]
+                                    <pre class="example">
 {
-    _id: "626447£5915d60485d2e243f",
-    title: "Pillow Talk",
-    description: "An interior decorator and a playboy songwriter share a telephone party line and size each other up.",
-    imageUrl: "https://en.wikipedia.org/wiki/Pillow_Talk_(film)#/media/File:Pillow_Talk_(1959_poster).jpg",
-    featured: true,
+    _id: "62645d17915d60485d2e2446",
+    title: "Grease",
+    description: "Good girl Sandy Olsson and greaser Danny Zuko fell in love over the summer. When they unexpectedly discover they're now in the same high school, will they be able to rekindle their romance?",
+    imageUrl:  "https://en.wikipedia.org/wiki/Grease_(film)#/media/File:Grease_ver2.jpg",
+    featured: false,
     genre: [
         "6263ac69915d60485d2e243a",
-        "6263ac9f915d60485d2e243b"
+        "6263ac9f915d60485d2e243b",
+        "6263ad37915d60485d2e243d"
     ],
     director: { 
-        name: "Michael Gordon",
-        bio: "Director, Michael Gordon, was born Irving Kunin Gordon on Sep 6, 1909 in Baltimore, MD. Gordon died at the age of 83 on Apr 23, 1993 in Century City, CA and was laid to rest in Mount Sinai Memorial Park Cemetery in Los Angeles, CA.",
-        birthYear: "1909-09-06T00:00:00.000Z",
-        deathYear: "1993-04-29T00:00:00.000Z"
+        name: "Randal Kleiser",
+        bio: "Randal Kleiser is an American film and television director, producer, screenwriter and actor, best known for directing the 1978 musical romantic-comedy film Grease.",
+        birthYear: "1946-07-20T00:00:00.000Z"
     }
     actors:[
         "6263aa94915d60485d2e2438",
@@ -262,27 +331,211 @@
 
 }
                                         </pre>
-                            </p>
-                        </td>
-                    </tr>
-                </table>
+                                </p>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
             </div>
 
             <div class="endpoint">
-                <h4>GET</h4>
-                <table>
-                    <tr>
-                        <th>Route</th>
-                        <td>/movies/genre/[genre]</td>
-                    </tr>
-                    <tr>
-                        <th>Description</th>
-                        <td>Returns a json list of all the movies with the searched for genre</td>
-                    </tr>
-                    <tr>
-                        <th>Response data</th>
-                        <td>JSON Object format
-                            <pre>
+                <h4 class="get">GET</h4>
+                <div style="overflow-x:auto;">
+                    <table>
+                        <tr>
+                            <th>Route</th>
+                            <td>/movies/genre/[genre]</td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <p>Description</p>
+                            </th>
+                            <td>
+                                <p>Returns a json list of all the movies with the searched for genre</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <p>Response data</p>
+                            </th>
+                            <td>
+                                <p>JSON Object format</p>
+                                <pre>
+{
+    _id: ObjectId,
+    title: String,
+    description: String,
+    imageUrl: String,
+    featured: Boolean,
+    genre: [
+        {
+            id: ObjectId,
+            name: String,
+            description: String
+        
+        }
+    ],
+    director: { 
+        name: String,
+        bio: String,
+        birthYear: Date,
+        deathYear: Date
+        }
+    actors:[Array]
+}
+                        </pre>
+                            </td>
+                            <td>
+                                <p>JSON Object example</p>
+
+                                <p>If not logged in:<br>
+                                    unauthorized</p>
+                                <p> If logged in: [Musical]
+                                    <pre class="example">
+{
+    _id: "62645d17915d60485d2e2446",
+    title: "Grease",
+    description: "Good girl Sandy Olsson and greaser Danny Zuko fell in love over the summer. When they unexpectedly discover they're now in the same high school, will they be able to rekindle their romance?",
+    imageUrl:  "https://en.wikipedia.org/wiki/Grease_(film)#/media/File:Grease_ver2.jpg",
+    featured: false,
+    genre: [
+        {
+            "_id": "6263ad37915d60485d2e243d",
+            "name": "Musical",
+            "description": "Should contain several scenes of characters bursting into song aimed at the viewer (this excludes songs performed for the enjoyment of other characters that may be viewing) while the rest of the time, usually but not exclusively, portraying a narrative that alludes to another Genre."
+        }
+    ],
+    director: { 
+        name: "Randal Kleiser",
+        bio: "Randal Kleiser is an American film and television director, producer, screenwriter and actor, best known for directing the 1978 musical romantic-comedy film Grease.",
+        birthYear: "1946-07-20T00:00:00.000Z"
+    }
+    actors:[
+        "6263aa94915d60485d2e2438",
+        "6263a2a6915d60485d2e2435"
+    ]
+                                    
+
+}
+                                        </pre>
+                                </p>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+
+            <div class="endpoint">
+                <h4 class="get">GET</h4>
+                <div style="overflow-x:auto;">
+                    <table>
+                        <tr>
+                            <th>Route</th>
+                            <td>/movies/actor/[actor]</td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <p>Description</p>
+                            </th>
+                            <td>
+                                <p>Returns a json list of all the movies with the searched for actor/actress</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <p>Response data</p>
+                            </th>
+                            <td>
+                                <p>JSON Object format</p>
+                                <pre>
+{
+    _id: ObjectId,
+    title: String,
+    description: String,
+    imageUrl: String,
+    featured: Boolean,
+    genre: [Array],
+    director: { 
+        name: String,
+        bio: String,
+        birthYear: Date,
+        deathYear: Date
+        }
+    actors:[{
+        _id: ObjectId,
+        name: String,
+        bio: String,
+        birthYear: Date
+    }]
+}
+                        </pre>
+                            </td>
+                            <td>
+                                <p>JSON Object example</p>
+
+                                <p>If not logged in:<br>
+                                    unauthorized</p>
+                                <p> If logged in: [Kate%20Hudson]
+                                    <pre class="example">
+{
+    _id:  "62645b69915d60485d2e2445",
+    title: "How to Lose a Guy in 10 Days",
+    description: "Andie Anderson is a writer for the women’s magazine Composure as the \"How to\", subject-matter expert. She is bored and wishes she could write about more serious topics. After Andie’s best friend Michelle experiences yet another break-up, Andie is inspired to write a new article titled \"How to Lose a Guy in 10 Days\"; she will begin dating a man and drive him away within 10 days.",
+    imageUrl: "https://en.wikipedia.org/wiki/How_to_Lose_a_Guy_in_10_Days#/media/File:HowToLoseAGuyimp.jpg",
+    featured: fasle,
+    genre: [
+        "6263ac69915d60485d2e243a",
+        "6263ac9f915d60485d2e243b"
+    ],
+    director: { 
+        "name": "Donald Petrie",
+        "bio": "Donald Petrie is an American film director and actor.",
+        "birthYear": "1954-04-02T00:00:00.000Z"
+    }
+    actors:[
+        {
+            "_id": "6263a187915d60485d2e2433",
+            "name": "Kate Hudson",
+            "bio": "Kate Garry Hudson is an American actress and businesswoman.",
+            "birthYear": "1979-04-19T00:00:00.000Z"
+        }
+    ]
+
+}
+                                        </pre>
+                                </p>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+
+
+            <div class="endpoint">
+                <h4 class="get">GET</h4>
+                <div style="overflow-x:auto;">
+                    <table>
+                        <tr>
+                            <th>Route</th>
+                            <td>/movies/director/[directorName]</td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <p>Description</p>
+                            </th>
+                            <td>
+                                <p>Returns a json list of all the movies with the searched for director</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <p>Response data</p>
+                            </th>
+                            <td>
+                                <p>JSON Object format</p>
+                                <pre>
 {
     _id: ObjectId,
     title: String,
@@ -299,61 +552,71 @@
     actors:[Array]
 }
                         </pre>
-                        </td>
-                        <td>JSON Object example
-                        
-                            <p>If not logged in:<br>
-                                unauthorized</p>
-                            <p> If logged in:
-                                <pre>
+                            </td>
+                            <td>
+                                <p>JSON Object example</p>
+
+                                <p>If not logged in:<br>
+                                    unauthorized</p>
+                                <p> If logged in: [Donald%20Petrie] </p>
+                                <pre class="example">
 {
-    _id: "626447£5915d60485d2e243f",
-    title: "Pillow Talk",
-    description: "An interior decorator and a playboy songwriter share a telephone party line and size each other up.",
-    imageUrl: "https://en.wikipedia.org/wiki/Pillow_Talk_(film)#/media/File:Pillow_Talk_(1959_poster).jpg",
-    featured: true,
+    _id:  "62645b69915d60485d2e2445",
+    title: "How to Lose a Guy in 10 Days",
+    description: "Andie Anderson is a writer for the women’s magazine Composure as the \"How to\", subject-matter expert. She is bored and wishes she could write about more serious topics. After Andie’s best friend Michelle experiences yet another break-up, Andie is inspired to write a new article titled \"How to Lose a Guy in 10 Days\"; she will begin dating a man and drive him away within 10 days.",
+    imageUrl: "https://en.wikipedia.org/wiki/How_to_Lose_a_Guy_in_10_Days#/media/File:HowToLoseAGuyimp.jpg",
+    featured: fasle,
     genre: [
         "6263ac69915d60485d2e243a",
         "6263ac9f915d60485d2e243b"
     ],
     director: { 
-        name: "Michael Gordon",
-        bio: "Director, Michael Gordon, was born Irving Kunin Gordon on Sep 6, 1909 in Baltimore, MD. Gordon died at the age of 83 on Apr 23, 1993 in Century City, CA and was laid to rest in Mount Sinai Memorial Park Cemetery in Los Angeles, CA.",
-        birthYear: "1909-09-06T00:00:00.000Z",
-        deathYear: "1993-04-29T00:00:00.000Z"
+        "name": "Donald Petrie",
+        "bio": "Donald Petrie is an American film director and actor.",
+        "birthYear": "1954-04-02T00:00:00.000Z"
     }
     actors:[
-        "6263aa94915d60485d2e2438",
-        "6263a2a6915d60485d2e2435"
+        {
+            "6263a187915d60485d2e2433",
+            "6263a1f3915d60485d2e2434"
+        }
     ]
 
 }
                                         </pre>
-                            </p>
-                        </td>
-                    </tr>
-                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
             </div>
 
 
-            <h3>Users</h3>
-            <p>Directory contains all the user related APIs.</p>
+            <h3 class="font" id="users">Users</h3>
+            <p class="font">Directory contains all the user related APIs.</p>
             <div class="endpoint">
-                <h4>POST</h4>
-                <table>
-                    <tr>
-                        <th>Route</th>
-                        <td>/users</td>
-                    </tr>
-                    <tr>
-                        <th>Description</th>
-                        <td>Creates a new user</td>
-                    </tr>
-                    <tr>
-                        <th>Request data </th>
-                        <td><p> Format:</p>
-                           
-                               <pre>
+                <h4 class="post">POST</h4>
+                <div style="overflow-x:auto;">
+                    <table>
+                        <tr>
+                            <th>Route</th>
+                            <td>/users</td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <p>Description</p>
+                            </th>
+                            <td>
+                                <p>Creates a new user</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <p>Request data </p>
+                            </th>
+                            <td>
+                                <p> Format:</p>
+
+                                <pre>
 {
     name: String,
     userName: String,
@@ -364,10 +627,11 @@
 }
 
                                </pre>
-                           
+
                             </td>
-                            <td><p>Example:</p>
-                               <pre>
+                            <td>
+                                <p>Example:</p>
+                                <pre>
 {
     "name": "testuser",
     "userName": "testuser",
@@ -377,13 +641,17 @@
     "favorites": [],                                  
 }
                                </pre>
-                           </td>
-                        
-                    </tr>
-                    <tr>
-                        <th>Response data</th>
-                        <td><p>Format of JSON Object:</p>
-                            <pre>
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <th>
+                                <p>Response data</p>
+                            </th>
+
+                            <td>
+                                <p>Format of JSON Object:</p>
+                                <pre>
 {
     name: String,
     userName: String,
@@ -396,9 +664,274 @@
 }
                         </pre>
 
-                        </td>
-                        <td><p>Example of JSON Object</p>
-                            <pre>
+                            </td>
+                            <td>
+                                <p>Example of JSON Object</p>
+                                <pre class="example">
+{
+    "name": "testuser",
+    "userName": "testuser",
+    "pasword": "$2b$10$LpKeTPhygdPltfG8XrmYBuDKZTouKfWNJqwga2uwYNx3tYSmzmy8y",
+    "email": "testuser@example.com",
+    "birthday": "1999-05-02T00:00:00.000Z",
+    "favorites": [],
+    "_id": "62713a9ddfaf6d76873277b2"                                   
+}
+                            </pre>
+                            </td>
+                        </tr>
+
+                    </table>
+                </div>
+            </div>
+
+            <div class="endpoint">
+                <h4 class="get">GET</h4>
+                <div style="overflow-x:auto;">
+                    <table>
+                        <tr>
+                            <th>Route</th>
+                            <td>/users/[userName]</td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <p>Description</p>
+                            </th>
+                            <td>
+                                <p>Get data of the queried username</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <p>Response data</p>
+                            </th>
+                            <td>
+                                <p>Format of JSON Object:</p>
+                                <pre>
+{
+    name: String,
+    userName: String,
+    password: String,
+    email: String,
+    birthday: Date,
+    favorites: Array,
+    _id: ObjectId
+                                
+}
+                        </pre>
+
+                            </td>
+                            <td>
+                                <p>Example of JSON Object</p>
+                                <p>If not logged in:<br>
+                                    unauthorized</p>
+                                <p> If logged in: [testuser] </p>
+                                <pre class="example">
+{
+    "name": "testuser",
+    "userName": "testuser",
+    "password": "$2b$10$LpKeTPhygdPltfG8XrmYBuDKZTouKfWNJqwga2uwYNx3tYSmzmy8y",
+    "email": "testuser@example.com",
+    "birthday": "1999-05-02T00:00:00.000Z",
+    "favorites": [],
+    "_id": "62713a9ddfaf6d76873277b2"                                   
+}
+                            </pre>
+                            </td>
+                        </tr>
+
+                    </table>
+                </div>
+            </div>
+
+            <div class="endpoint">
+                <h4 class="put">PUT</h4>
+                <div style="overflow-x:auto;">
+                    <table>
+                        <tr>
+                            <th>Route</th>
+                            <td>/users/[userName]</td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <p>Description</p>
+                            </th>
+                            <td>
+                                <p>Update data of queried existing username.</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <p>Request data</p>
+                            </th>
+                            <td>
+                                <p> Format: (any of the keys with new values that need to be updated</p>
+                                <pre>
+{
+    name: String,
+    
+
+}
+                               </pre>
+
+                            </td>
+                            <td>
+                                <p>Example:</p>
+                                <pre>
+{
+    "name": "updatedUser"
+                                   
+}
+                               </pre>
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <th>
+                                <p>Response data</p>
+                            </th>
+                            <td>
+                                <p>Format of JSON Object:</p>
+                                <pre>
+{
+    name: String,
+    userName: String,
+    password: String,
+    email: String,
+    birthday: Date,
+    favorites: Array,
+    _id: ObjectId
+                                
+}
+                        </pre>
+
+                            </td>
+                            <td>
+                                <p>Example of JSON Object</p>
+                                <p>If not logged in:<br>
+                                    unauthorized</p>
+                                <p> If logged in: [testuser] </p>
+                                <pre class="example">
+{
+    "name": "updatedUser",
+    "userName": "testuser",
+    "pas"$2b$10$LpKeTPhygdPltfG8XrmYBuDKZTouKfWNJqwga2uwYNx3tYSmzmy8y",
+    "email": "testuser@example.com",
+    "birthday": "1999-05-02T00:00:00.000Z",
+    "favorites": [],
+    "_id": "62713a9ddfaf6d76873277b2"                                   
+}
+                            </pre>
+                            </td>
+                        </tr>
+
+                    </table>
+                </div>
+            </div>
+
+            <div class="endpoint">
+                <h4 class="post">POST</h4>
+                <div style="overflow-x:auto;">
+                    <table>
+                        <tr>
+                            <th>Route</th>
+                            <td>/users/[userName]/[movieID]</td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <p>Description</p>
+                            </th>
+                            <td>
+                                <p>Add movie to users favorites list.</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <p>Response data</p>
+                            </th>
+                            <td>
+                                <p>Format of JSON Object:</p>
+                                <pre>
+{
+    name: String,
+    userName: String,
+    password: String,
+    email: String,
+    birthday: Date,
+    favorites: Array,
+    _id: ObjectId
+                                
+}
+                        </pre>
+
+                            </td>
+                            <td>
+                                <p>Example of JSON Object</p>
+                                <p>If not logged in:<br>
+                                    unauthorized</p>
+                                <p> If logged in: [testuser]/[62645b69915d60485d2e2445] </p>
+                                <pre class="example">
+{
+    "name": "testuser",
+    "userName": "testuser",
+    "pas"$2b$10$LpKeTPhygdPltfG8XrmYBuDKZTouKfWNJqwga2uwYNx3tYSmzmy8y",
+    "email": "testuser@example.com",
+    "birthday": "1999-05-02T00:00:00.000Z",
+    "favorites": [
+        "62645b69915d60485d2e2445"
+    ],
+    "_id": "62713a9ddfaf6d76873277b2"                                   
+}
+                            </pre>
+                            </td>
+                        </tr>
+
+                    </table>
+                </div>
+            </div>
+
+            <div class="endpoint">
+                <h4 class="delete">DELETE</h4>
+                <div style="overflow-x:auto;">
+                    <table>
+                        <tr>
+                            <th>Route</th>
+                            <td>/users/[userName]/[movieID]</td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <p>Description</p>
+                            </th>
+                            <td>
+                                <p>Delete movie from users favorites list.</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <p>Response data</p>
+                            </th>
+                            <td>
+                                <p>Format of JSON Object:</p>
+                                <pre>
+{
+    name: String,
+    userName: String,
+    password: String,
+    email: String,
+    birthday: Date,
+    favorites: Array,
+    _id: ObjectId
+                                
+}
+                        </pre>
+
+                            </td>
+                            <td>
+                                <p>Example of JSON Object</p>
+                                <p>If not logged in:<br>
+                                    unauthorized</p>
+                                <p> If logged in: [testuser][62645b69915d60485d2e2445] </p>
+                                <pre class="example">
 {
     "name": "testuser",
     "userName": "testuser",
@@ -409,225 +942,69 @@
     "_id": "62713a9ddfaf6d76873277b2"                                   
 }
                             </pre>
-                        </td>
-                    </tr>
-                    
-                </table>
+                            </td>
+                        </tr>
+
+                    </table>
+                </div>
             </div>
-            
+
+            <div class="endpoint">
+                <h4 class="delete">DELETE</h4>
+                <div style="overflow-x:auto;">
+                    <table>
+                        <tr>
+                            <th>Route</th>
+                            <td>/users/[userName]/</td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <p>Description</p>
+                            </th>
+                            <td>
+                                <p>Delete user from database (deregister).</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                <p>Response data</p>
+                            </th>
+                            <td>
+                                <p>Output Format:</p>
+                                <pre>
+[userName] was deleted.
+                            </pre>
+                            </td>
+                            <td>
+                                <p>Example of JSON Object</p>
+                                <p>If not logged in:<br>
+                                    unauthorized</p>
+                                <p> If logged in: [testuser] </p>
+                                <pre>
+{
+    testuser was deleted.                                  
+}
+                            </pre>
+                            </td>
+                        </tr>
+
+                    </table>
+                </div>
+            </div>
 
 
-            <!-- <table>
-        <thead>
-            <th>Business Logic</th>
-            <th>URL</th>
-            <th>HTTP method</th>
-            <th>Request body data format</th>
-            <th>Response body data format</th>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Return a list of ALL movies to the user</td>
-                <td>/movies</td>
-                <td>GET</td>
-                <td>none</td>
-                <td>JSON object holding data about all the movies</td>
-            </tr>
-            <tr>
-                <td>Return data (description, genre, director, image URL, whether it’s featured or not) about a single
-                    movie by title to the user</td>
-                <td>/movies/:title</td>
-                <td>GET</td>
-                <td>none</td>
-                <td>JSON object holding data about a specific movie <br />
-                    Example: <br />
-                    <br />
-                    <div class="code">{ <br />
-                        <div class="one"> "title": "Grease",<br /></div>
-                        <div class="one">"year": 1978,<br /></div>
-                        <div class="one">"genre": [<br /></div>
-                        <div class="two">"comedy",<br /></div>
-                        <div class="two">"romance",<br /></div>
-                        <div class="two">"musical"<br /></div>
-                        <div class="one"> ],<br /></div>
-                        <div class="one">"director": {<br /></div>
-                        <div class="two">"name": "Randal Kleiser",<br /></div>
-                        <div class="two">"birth": 1946<br /></div>
-                        }<br />
-                        }
-                    </div>
-                    <br />
-                </td>
-            </tr>
-            <tr>
-                <td>Return data about a genre (description) by name/title (e.g., “musical”)</td>
-                <td>/movies/genre/:genres</td>
-                <td>GET</td>
-                <td>none</td>
-                <td>JSON object holding the data about all the movies with the searched for genre
-                    Example: <br />
-                    <br />
-                    <div class="code">{ <br />
-                        <div class="one"> "title": "The Pajama Game",<br /></div>
-                        <div class="one">"year": 1957,<br /></div>
-                        <div class="one">"genre": [<br /></div>
-                        <div class="two">"comedy",<br /></div>
-                        <div class="two">"drama",<br /></div>
-                        <div class="two">"musical"<br /></div>
-                        <div class="one"> ],<br /></div>
-                        <div class="one">"director": {<br /></div>
-                        <div class="two">"name": "George Abott",<br /></div>
-                        <div class="two">"birth": 1887<br /></div>
-                        <div class="two">"death": 1995<br /></div>
-                        }<br />
-                        }
-                    </div>
-                    <br />
-                    <div class="code">{ <br />
-                        <div class="one"> "title": "Grease",<br /></div>
-                        <div class="one">"year": 1978,<br /></div>
-                        <div class="one">"genre": [<br /></div>
-                        <div class="two">"comedy",<br /></div>
-                        <div class="two">"romance",<br /></div>
-                        <div class="two">"musical"<br /></div>
-                        <div class="one"> ],<br /></div>
-                        <div class="one">"director": {<br /></div>
-                        <div class="two">"name": "Randal Kleiser",<br /></div>
-                        <div class="two">"birth": 1946<br /></div>
-                        }<br />
-                        }
-                    </div>
-                    <br />
-                </td>
-            </tr>
-    
-            <tr>
-                <td>Return data about a director (bio, birth year, death year) by name</td>
-                <td>/movies/director/:directorName</td>
-                <td>GET</td>
-                <td>none</td>
-                <td>JSON object holding the data about a specific director
-                    Example: <br />
-                    <br />
-                    <div class="code">{ <br />
-                        <div class="one"> "name": "Frank Tashlin",<br /></div>
-                        <div class="one">"birth": 1913<br /></div>
-                        <div class="one">"death": 1972<br /></div>
-                        }<br />
-                    </div>
-                    <br />
-                </td>
-            </tr>
-            <tr>
-                <td>Return data about a user by userName</td>
-                <td>/users/:userName</td>
-                <td>GET</td>
-                <td>none</td>
-                <td>JSON object holding the data about a specific director
-                    Example: <br />
-                    <br />
-                    <div class="code">{ <br />
-                        <div class="one"> "userName": "Mary",<br /></div>
-                        <div class="one">"name": "Mary",<br /></div>
-                        <div class="one">"password": "password",<br /></div>
-                        <div class="one">"email": "mary@example.com",<br /></div>
-                        <div class="one">"favorites": [],<br /></div>
-                        <div class="one">"id": "990b9b7a-ffc5-41a9-9e2e-2ffae69037ee",<br /></div>
-                        }<br />
-                    </div>
-                    <br />
-                </td>
-            </tr>
-            <tr>
-                <td>Allow new users to register</td>
-                <td>/users</td>
-                <td>POST</td>
-                <td>JSON object holding the data about the newly registered user
-                    Example: <br />
-                    <br />
-                    <div class="code">{ <br />
-                        <div class="one"> "userName": "Mary",<br /></div>
-                        <div class="one">"name": "Mary",<br /></div>
-                        <div class="one">"password": "password",<br /></div>
-                        <div class="one">"favorites": [],<br /></div>
-                        }<br />
-                    </div>
-                    <br />
-                </td>
-                <td>JSON object holding data about the newly added user and their ID
-                    Example: <br />
-                    <br />
-                    <div class="code">{ <br />
-                        <div class="one"> "userName": "Mary",<br /></div>
-                        <div class="one">"name": "Mary",<br /></div>
-                        <div class="one">"password": "password",<br /></div>
-                        <div class="one">"favorites": [],<br /></div>
-                        <div class="one">"id": "990b9b7a-ffc5-41a9-9e2e-2ffae69037ee",<br /></div>
-                        }<br />
-                    </div>
-                    <br />
-                </td>
-            </tr>
-            <tr>
-                <td>Allow users to update their user info (username)</td>
-                <td>/users/:username</td>
-                <td>PUT</td>
-                <td>JSON object holding data about the updates to the user data
-                    Example: <br />
-                    <br />
-                    <div class="code">{ <br />
-                        <div class="one">"name": "Sam",<br /></div>
-                        }<br />
-                    </div>
-                    <br />
-                </td>
-                <td>JSON object holding the updated user data
-                    JSON object holding data about the newly added user and their ID
-                    Example: <br />
-                    <br />
-                    <div class="code">{ <br />
-                        <div class="one">"id": 2,<br /></div>
-                        <div class="one"> "username": "Sammy",<br /></div>
-                        <div class="one">"name": "Sam",<br /></div>
-                        <div class="one">"password": "password",<br /></div>
-                        <div class="one">"favorites": [ </div>
-                        <div class="two">"Scream",<br /></div>
-                        <div class="one">],<br /></div>
-                        }<br />
-                    </div>
-                    <br />
-                </td>
-            </tr>
-            <tr>
-                <td>Allow users to add a movie to their list of favorites </td>
-                <td>/users/:username/:movieTitle</td>
-                <td>POST</td>
-                <td>none</td>
-                <td>Text message that movie has been added to the user profile.</td>
-            </tr>
-            <tr>
-                <td>Allow users to remove a movie from their list of favorites</td>
-                <td>/users/:username/:movieTitle</td>
-                <td>DELETE</td>
-                <td>none</td>
-                <td>Text message that the movie has been deleted from the user profile.</td>
-            </tr>
-            <tr>
-                <td>Allow existing users to deregister </td>
-                <td>/users/:username</td>
-                <td>DELETE</td>
-                <td>none</td>
-                <td>Text message that the user has been deleted.</td>
-            </tr>
-        </tbody>
 
-    </table> -->
+
         </main>
-
+      
         <footer>
-
+            <button type="button" class="  btn-floating btn-lg" id="btn-back-to-top">
+                <i class="fa fa-arrow-up" aria-hidden="true"></i>
+              </button>
         </footer>
+
     </div>
+    <script src="docu.js"></script>
 </body>
 
 </html>
