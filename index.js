@@ -132,10 +132,7 @@ app.get('/movies/genre/:genres', passport.authenticate('jwt', {
     session: false
 }), (req, res) => {
 
-    Movies.find({
-            //find by genreId
-            //genre: req.params.genres
-        })
+    Movies.find()
 
 
         .populate({
@@ -161,14 +158,11 @@ app.get('/movies/genre/:genres', passport.authenticate('jwt', {
 });
 
 //Read
-//return data about actor
+//return data about actor by name
 app.get('/movies/actor/:actor', passport.authenticate('jwt', {
     session: false
 }), (req, res) => {
-    Movies.find({
-            //find by actorId
-            //actor: req.params.actor
-        })
+    Movies.find()
 
 
         .populate({
