@@ -95,9 +95,7 @@ app.use(express.static('public'));
 
 // READ
 //url /movies returns movies in json format
-app.get('/movies', passport.authenticate('jwt', {
-    session: false
-}), (req, res) => {
+app.get('/movies', function (req, res) {
     Movies.find()
         .then((movies) => {
             res.status(201).json(movies);
