@@ -97,10 +97,10 @@ app.use(express.static('public'));
 //url /movies returns movies in json format
 app.get('/movies', function (req, res) {
     Movies.find()
+        .populate('genre')
         .then((movies) => {
             res.status(201).json(movies);
         })
-        .populate('genre')
         .catch((err) => {
             console.error(err);
             res.status(500).send('Error: ' + err);
@@ -115,7 +115,7 @@ app.get('/movies/:title', passport.authenticate('jwt', {
 }), (req, res) => {
     Movies.findOne({
             title: req.params.title
-            
+
         })
         .populate('genre')
         .then((movie) => {
