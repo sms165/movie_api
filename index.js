@@ -100,6 +100,7 @@ app.get('/movies', function (req, res) {
         .then((movies) => {
             res.status(201).json(movies);
         })
+        .populate('genre')
         .catch((err) => {
             console.error(err);
             res.status(500).send('Error: ' + err);
