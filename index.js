@@ -114,7 +114,9 @@ app.get('/movies/:title', passport.authenticate('jwt', {
 }), (req, res) => {
     Movies.findOne({
             title: req.params.title
+            
         })
+        .populate('genre')
         .then((movie) => {
             res.json(movie);
         })
