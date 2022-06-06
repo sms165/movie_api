@@ -95,10 +95,10 @@ app.use(express.static('public'));
 
 // READ
 //url /movies returns movies in json format
-// app.get('/movies', passport.authenticate('jwt', {
-//     session: false
-// }), (req, res) => {
-app.get('/movies', function (req, res) {
+app.get('/movies', passport.authenticate('jwt', {
+    session: false
+}), (req, res) => {
+//app.get('/movies', function (req, res) {
     Movies.find()
         .populate('genre')
         .then((movies) => {
