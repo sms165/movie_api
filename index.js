@@ -53,7 +53,7 @@ app.use(bodyParser.urlencoded({
 
 //allows implementation of CORS: Cross Origin Resource Sharing
 const cors = require('cors');
-app.use(cors());
+app.use(cors({credentials: true}));
 
 //CORS only specific domains allowed
 // let allowedOrigins = ['http://localhost:8080'];
