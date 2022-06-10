@@ -54,7 +54,7 @@ app.use(bodyParser.urlencoded({
 //allows implementation of CORS: Cross Origin Resource Sharing
 const cors = require('cors');
 app.use(cors({credentials: true}));
-res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+
 //CORS only specific domains allowed
 // let allowedOrigins = ['http://localhost:8080'];
 
