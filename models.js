@@ -11,7 +11,8 @@ let actorSchema = mongoose.Schema({
     name: {type:String, required:true},
     bio: String,
     birthYear:Date,
-    deathYear:Date
+    deathYear:Date,
+    portrait: String
 });
 
 let movieSchema = mongoose.Schema({

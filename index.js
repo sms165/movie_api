@@ -4,6 +4,8 @@ const models = require('./models.js');
 
 const Movies = models.Movie;
 const Users = models.User;
+const Actors = models.Actor;
+const Genres = models.Genre;
 
 //connect to the database myFlixDb
 mongoose.connect(process.env.CONNECTION_URI, {
@@ -135,6 +137,22 @@ app.get('/movies/:title', passport.authenticate('jwt', {
         });
 });
 
+app.get('/movies/genre', passport.authenticate('jwt', {
+    session: false
+}), (req, res) => {
+//app.get('/movies', function (req, res) {
+    Genres.find()
+    
+        .then((genre) => {
+            res.status(201).json(genre);
+        })
+        .catch((err) => {
+            console.error(err);
+            res.status(500).send('Error: ' + err);
+        });
+    // res.status(200).json(movies);
+});
+
 // READ
 //return data about a genre by title
 app.get('/movies/genre/:genres', passport.authenticate('jwt', {
@@ -164,6 +182,24 @@ app.get('/movies/genre/:genres', passport.authenticate('jwt', {
             res.status(500).send('Error: ' + err);
         });
 
+});
+
+// READ
+//url /actors returns actors in json format
+app.get('/movies/actor', passport.authenticate('jwt', {
+    session: false
+}), (req, res) => {
+//app.get('/movies', function (req, res) {
+    Actors.find()
+    
+        .then((actors) => {
+            res.status(201).json(actors);
+        })
+        .catch((err) => {
+            console.error(err);
+            res.status(500).send('Error: ' + err);
+        });
+    // res.status(200).json(movies);
 });
 
 //Read
