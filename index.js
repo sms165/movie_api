@@ -186,7 +186,7 @@ app.get('/movies/genre/:genres', passport.authenticate('jwt', {
 
 // READ
 //url /actors returns actors in json format
-app.get('/movies/actor', passport.authenticate('jwt', {
+app.get('/actor', passport.authenticate('jwt', {
     session: false
 }), (req, res) => {
 //app.get('/movies', function (req, res) {
