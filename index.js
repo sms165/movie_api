@@ -100,7 +100,8 @@ app.get('/movies', passport.authenticate('jwt', {
 }), (req, res) => {
 //app.get('/movies', function (req, res) {
     Movies.find()
-        .populate('genre', 'actors')
+        .populate('genre')
+        .populate('actors')
         .then((movies) => {
             res.status(201).json(movies);
         })
