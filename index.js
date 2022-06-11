@@ -137,7 +137,7 @@ app.get('/movies/:title', passport.authenticate('jwt', {
         });
 });
 
-app.get('/movies/genre', passport.authenticate('jwt', {
+app.get('/genre', passport.authenticate('jwt', {
     session: false
 }), (req, res) => {
 //app.get('/movies', function (req, res) {
