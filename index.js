@@ -192,8 +192,8 @@ app.get('/movies/actor', passport.authenticate('jwt', {
 //app.get('/movies', function (req, res) {
     Actors.find()
     
-        .then((actors) => {
-            res.status(201).json(actors);
+        .then((actor) => {
+            res.status(201).json(actor);
         })
         .catch((err) => {
             console.error(err);
