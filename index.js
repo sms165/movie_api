@@ -232,6 +232,26 @@ app.get('/movies/actor/:actor', passport.authenticate('jwt', {
 
 
 // READ
+//url /movies/director returns movies in json format
+app.get('/movies/director', passport.authenticate('jwt', {
+    session: false
+}), (req, res) => {
+//app.get('/movies', function (req, res) {
+    Movies.find()
+        .populate('genre')
+        .populate('actors')
+        
+        .then((movies) => {
+            res.status(201).json(movies);
+        })
+        .catch((err) => {
+            console.error(err);
+            res.status(500).send('Error: ' + err);
+        });
+    // res.status(200).json(movies);
+});
+
+// READ
 //return data about director by name
 app.get('/movies/director/:directorName', passport.authenticate('jwt', {
     session: false
