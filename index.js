@@ -277,6 +277,7 @@ app.get('/users/:userName', passport.authenticate('jwt', {
     Users.findOne({
             userName: req.params.userName
         })
+        .populate('favorites')
         .then((user) => {
             res.json(user);
         })
