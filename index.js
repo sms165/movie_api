@@ -381,7 +381,7 @@ app.put('/users/:username', passport.authenticate('jwt', {
 });
 
 app.post('/users/:username', (req, res) => {
-    passport.authenticate('jwt', { session: false}, (error, user, info) => {
+    passport.authenticate('local', { session: false}, (error, user, info) => {
         if (error || !user) {
             return res.status(400).json({
                 message: "Something is not right",
