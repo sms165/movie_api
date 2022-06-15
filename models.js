@@ -48,6 +48,11 @@ userSchema.methods.validatePassword = function(password){
     return bcrypt.compareSync(password, this.password);
 };
 
+userSchema.methods.checkPassword = function(password){
+    return bcrypt.compareSync(password, this.password);
+};
+
+
 //create collections: titles will come out as lowercase and pluralized
 //Actor will create a collection called db.actors
 let Actor = mongoose.model('Actor', actorSchema);

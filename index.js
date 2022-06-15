@@ -381,25 +381,25 @@ app.put('/users/:username', passport.authenticate('jwt', {
 
 });
 
-// app.put('/users/:username/change_password',{oldPassword: oldPassword, newPassword:newPassword}, passport.authenticate('jwt', {
-//     session: false }), (req, res) => {
-//         Users.findOne({
-//             userName: req.params.username
-//         })
-//         .then((user) => {
-//         if(!user.validatePassword(oldPassword)){
-//             console.log('incorrect password');
-//             return callback(null, false, {message: 'Incorrect password.'});
-//         }else{
-//             console.log('correct password')
-//             // let hashedPassword = Users.hashPassword(req.body.newPassword);
-//             // $set:{
-//             //     newPassword: hashedPassword,
-//             // }
+app.put('/users/:username/change_password',{oldPassword: oldPassword, newPassword:newPassword}, passport.authenticate('jwt', {
+    session: false }), (req, res) => {
+        Users.findOne({
+            userName: req.params.username
+        })
+        .then((user) => {
+        if(!user.checkPassword(oldPassword)){
+            console.log('incorrect password');
+            return callback(null, false, {message: 'Incorrect password.'});
+        }else{
+            console.log('correct password')
+            // let hashedPassword = Users.hashPassword(req.body.newPassword);
+            // $set:{
+            //     newPassword: hashedPassword,
+            // }
 
-//         }
-//     }) (req, res);
-// })
+        }
+    }) (req, res);
+})
 
 //CREATE
 // add a movie to users list of favorites
