@@ -381,21 +381,23 @@ app.put('/users/:username', passport.authenticate('jwt', {
 
 });
 
-app.post('/users/:username', (req, res) => {
-    passport.authenticate('local', { session: false}, (error, user, info) => {
-        if (error || !user) {
-            return res.status(400).json({
-                message: "Something is not right",
-                user:user
-            });
+app.put('/users/:username/change_password',{oldPassword: oldPassword, newPassword:newPassword}, passport.authenticate('jwt', {
+    session: false }), (req, res) => {
+        Users.findOne({
+            userName: req.params.username
+        })
+        .then((user) => {
+        if(!user.validatePassword(oldPassword)){
+            console.log('incorrect password');
+            return callback(null, false, {message: 'Incorrect password.'});
+        }else{
+            console.log('correct password')
+            // let hashedPassword = Users.hashPassword(req.body.newPassword);
+            // $set:{
+            //     newPassword: hashedPassword,
+            // }
+
         }
-        req.login(user, { session: false}, (error) => {
-            if(error){
-                res.send(error);
-            }
-            
-            return res.json({ user });
-        });
     }) (req, res);
 })
 
