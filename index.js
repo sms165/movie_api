@@ -381,33 +381,33 @@ app.put('/users/:username', passport.authenticate('jwt', {
 
 });
 
-app.put('/users/:username/change_password', passport.authenticate('jwt', {
-            session: false
-        }), (req, res) => {
-            Users.findOne({
-                    userName: req.params.username
-                }, {
-                    $set: {
-                        oldPassword: req.body.oldPassword,
-                        newPassword: req.body.newPassword,
+// app.put('/users/:username/change_password', passport.authenticate('jwt', {
+//             session: false
+//         }), (req, res) => {
+//             Users.findOne({
+//                     userName: req.params.username
+//                 }, {
+//                     $set: {
+//                         oldPassword: req.body.oldPassword,
+//                         newPassword: req.body.newPassword,
 
-                    }}
-                    .then((user) => {
-                            if (!user.checkPassword(oldPassword)) {
-                                console.log('incorrect password');
-                                return callback(null, false, {
-                                    message: 'Incorrect password.'
-                                });
-                            } else {
-                                console.log('correct password')
-                                // let hashedPassword = Users.hashPassword(req.body.newPassword);
-                                // $set:{
-                                //     newPassword: hashedPassword,
-                            }
+//                     }}
+//                     .then((user) => {
+//                             if (!user.checkPassword(oldPassword)) {
+//                                 console.log('incorrect password');
+//                                 return callback(null, false, {
+//                                     message: 'Incorrect password.'
+//                                 });
+//                             } else {
+//                                 console.log('correct password')
+//                                 // let hashedPassword = Users.hashPassword(req.body.newPassword);
+//                                 // $set:{
+//                                 //     newPassword: hashedPassword,
+//                             }
 
-                        }
-                    ))
-            })
+//                         }
+//                     ))
+//             })
 
         //CREATE
         // add a movie to users list of favorites
