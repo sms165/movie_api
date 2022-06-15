@@ -48,8 +48,8 @@ userSchema.methods.validatePassword = function(password){
     return bcrypt.compareSync(password, this.password);
 };
 
-userSchema.methods.checkPassword = function(password){
-    return bcrypt.compareSync(password, this.password);
+user.methods.checkPassword = function(password){
+    return bcrypt.compareSync(oldPassword, this.password);
 };
 
 
