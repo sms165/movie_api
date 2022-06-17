@@ -381,117 +381,125 @@ app.put('/users/:username', passport.authenticate('jwt', {
 
 });
 
-// app.put('/users/:username/change_password', passport.authenticate('jwt', {
-//             session: false
-//         }), (req, res) => {
-//             Users.findOne({
-//                     userName: req.params.username
-//                 }, {
-//                     $set: {
-//                         oldPassword: hashedPassword,
-//                         newPassword: hashedPassword,
+app.put('/users/:username/change_password', passport.authenticate('jwt', {
+        session: false
+    }), (req, res) => {
+        {
 
-//                     }}
-//                     .then((user) => {
-//                             if (!user.checkPassword(oldPassword)) {
-//                                 console.log('incorrect password');
-//                                 // return callback(null, false, {
-//                                 //     message: 'Incorrect password.'
-//                                 // });
-//                             } else {
-//                                 console.log('correct password')
-//                                 // let hashedPassword = Users.hashPassword(req.body.newPassword);
-//                                 // $set:{
-//                                 //     newPassword: hashedPassword,
-//                             }
+            const oldPassword = req.body.oldPassword;
+            const newPassword = req.body.newPassword;
 
-//                         }
-//                     ))
-//             })
-
-        //CREATE
-        // add a movie to users list of favorites
-        app.post('/users/:username/:movieId', passport.authenticate('jwt', {
-            session: false
-        }), (req, res) => {
-            Users.findOneAndUpdate({
-                    userName: req.params.username
-                }, {
-                    $addToSet: {
-                        favorites: req.params.movieId
-                    }
-                }, {
-                    new: true
-                },
-                (err, updateUser) => {
-                    if (err) {
-                        console.error(err);
-                        res.status(500).send('Error: ' + err);
-                    } else {
-                        res.json(updateUser);
-                    }
-                });
-
-        });
-
-        // DELETE
-        //allow user to remove a movie from their favorites list
-        app.delete('/users/:username/:movieId', passport.authenticate('jwt', {
-            session: false
-        }), (req, res) => {
-            Users.findOneAndUpdate({
-                    userName: req.params.username
-                }, {
-                    $pull: {
-                        favorites: req.params.movieId
-                    }
-                }, {
-                    new: true
-                },
-                (err, updateUser) => {
-                    if (err) {
-                        console.error(err);
-                        res.status(500).send('Error: ' + err);
-                    } else {
-                        res.json(updateUser);
-                    }
-                });
-        });
-
-        //DELETE
-        //allow user to deregister
-        app.delete('/users/:username', passport.authenticate('jwt', {
-            session: false
-        }), (req, res) => {
-            Users.findOneAndRemove({
+            Users.findOne({
                     userName: req.params.username
                 })
                 .then((user) => {
-                    if (!user) {
-                        res.status(400).send(req.params.username + ' was not found.');
+                    if (!user.validatePassword(oldPassword)) {
+                        return res.status(400).send("Incorrect password");
+                        // return callback(null, false, {
+                        //     message: 'Incorrect password.'
+                        // });
                     } else {
-                        res.status(200).send(req.params.username + ' was deleted.');
+                        user.password = Users.hashPassword(newPassword)
+                        user.save();
+                        res.status(200).send("Password successfully updated");
+                        // let hashedPassword = Users.hashPassword(req.body.newPassword);
+                        // $set:{
+                        //     newPassword: hashedPassword,
                     }
                 })
-                .catch((err) => {
-                    console.error(err);
-                    res.status(500).send('Error: ' + err);
+
+                .catch((error) => {
+                    console.error(error);
+                    res.status(500).send("Error: " + error);
                 });
+        }
+    
+});
 
+//CREATE
+// add a movie to users list of favorites
+app.post('/users/:username/:movieId', passport.authenticate('jwt', {
+    session: false
+}), (req, res) => {
+    Users.findOneAndUpdate({
+            userName: req.params.username
+        }, {
+            $addToSet: {
+                favorites: req.params.movieId
+            }
+        }, {
+            new: true
+        },
+        (err, updateUser) => {
+            if (err) {
+                console.error(err);
+                res.status(500).send('Error: ' + err);
+            } else {
+                res.json(updateUser);
+            }
         });
 
+});
 
-        //error handling
-        app.use((err, req, res, next) => {
-            console.error(err.stack);
-            res.status(500).send('Something went wrong!');
+// DELETE
+//allow user to remove a movie from their favorites list
+app.delete('/users/:username/:movieId', passport.authenticate('jwt', {
+    session: false
+}), (req, res) => {
+    Users.findOneAndUpdate({
+            userName: req.params.username
+        }, {
+            $pull: {
+                favorites: req.params.movieId
+            }
+        }, {
+            new: true
+        },
+        (err, updateUser) => {
+            if (err) {
+                console.error(err);
+                res.status(500).send('Error: ' + err);
+            } else {
+                res.json(updateUser);
+            }
+        });
+});
+
+//DELETE
+//allow user to deregister
+app.delete('/users/:username', passport.authenticate('jwt', {
+    session: false
+}), (req, res) => {
+    Users.findOneAndRemove({
+            userName: req.params.username
+        })
+        .then((user) => {
+            if (!user) {
+                res.status(400).send(req.params.username + ' was not found.');
+            } else {
+                res.status(200).send(req.params.username + ' was deleted.');
+            }
+        })
+        .catch((err) => {
+            console.error(err);
+            res.status(500).send('Error: ' + err);
         });
 
-        //listen for requests (only localhost)
-        // app.listen(8080, () => {
-        //     console.log('The app is listening on port 8080. ')
-        // });
+});
 
-        const port = process.env.PORT || 8080; app.listen(port, '0.0.0.0', () => {
-            console.log('Listening on Port ' + port);
-        });
+
+//error handling
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send('Something went wrong!');
+});
+
+//listen for requests (only localhost)
+// app.listen(8080, () => {
+//     console.log('The app is listening on port 8080. ')
+// });
+
+const port = process.env.PORT || 8080;
+app.listen(port, '0.0.0.0', () => {
+    console.log('Listening on Port ' + port);
+});

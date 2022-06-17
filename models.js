@@ -48,9 +48,6 @@ userSchema.methods.validatePassword = function(password){
     return bcrypt.compareSync(password, this.password);
 };
 
-// userSchema.methods.checkPassword = function(oldPassword){
-//     return bcrypt.compareSync(oldPassword, this.password);
-// };
 
 
 //create collections: titles will come out as lowercase and pluralized
